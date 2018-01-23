@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Dumb;
 use Illuminate\Http\Request;
 use App\User;
 use Auth;
@@ -19,7 +20,7 @@ class UserController extends Controller{
         if(Auth::attempt(['email' => $request->input('email'), 'password' => $request->input('password')]))
         {
             //dd('its');
-            return redirect()->route('home.feeds');
+            return redirect()->route('home.feeds', ['type' => 'home']);
         }
 
         return redirect()->back();
@@ -67,9 +68,10 @@ class UserController extends Controller{
         $user->name = $name;
         $user->email = $email;
         $user->password = $password;
+        $user->type = 'common';
         $user->save();
         Auth::login($user);
-        return redirect()->route('home.feeds');
+        return redirect()->route('home.feeds', ['type' => 'home']);
 //
 //        $this -> validate($request, [
 //            'email' => 'email|required|unique:users',
@@ -87,18 +89,12 @@ class UserController extends Controller{
         //return redirect()->route('product.index');
     }
 
-    public function getHomeFeeds(){
-        return view('home.hompg');
-    }
-
     public function getLogout(Request $request){
         Auth::logout();
         //return redirect()->back();//using back is tricky many a times
         return redirect()->route('home');
     }
 
-    public function getCommittees(){
-        return view('posts.committee');
-    }
+
 
 }

@@ -31,7 +31,7 @@
             margin-bottom: 30px;
         }
         .jumbotron {
-            background-color: #74AFAD;
+            background-color: #0084b4;
             color: #fff;
             padding: 100px 25px;
             font-family: Montserrat, sans-serif;
@@ -46,7 +46,7 @@
 
         .navbar {
             margin-bottom: 0;
-            background-color: #74AFAD;
+            background-color: black;
             z-index: 9999;
             border: 0;
             font-size: 12px !important;
@@ -122,7 +122,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#myPage">Logo</a>
+            <a class="navbar-brand" href="#myPage">VIEMS</a>
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav navbar-right">

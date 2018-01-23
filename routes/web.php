@@ -16,9 +16,19 @@ Route::get('/', [
     'as' => 'home'
 ]);
 
+Route::get('/Home/{type}', [
+    'uses' => 'PostController@getCommitteesFeeds',
+    'as' => 'home.committeefeeds'
+]);
+
 Route::get('/Home', [
-    'uses' => 'UserController@getHomeFeeds',
+    'uses' => 'PostController@getHomeFeeds',
     'as' => 'home.feeds'
+]);
+
+Route::get('/Add a Post', [
+    'uses' => 'PostController@getAddPost',
+    'as' => 'posts.addpost'
 ]);
 
 Route::get('/logout',[
@@ -28,7 +38,7 @@ Route::get('/logout',[
 
 
 Route::get('/Commitees',[
-    'uses' => 'UserController@getCommittees',
+    'uses' => 'PostController@getCommittees',
     'as' => 'committee'
 ]);
 
@@ -36,6 +46,12 @@ Route::get('/Commitees',[
 Route::post('/sign_in', [
     'uses' => 'UserController@postSignin',
     'as' => 'user.signin'
+]);
+
+
+Route::post('/CreatingPost', [
+    'uses' => 'PostController@postCreatePost',
+    'as' => 'post.create'
 ]);
 
 
