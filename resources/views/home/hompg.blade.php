@@ -1,8 +1,8 @@
-{{--@extends('layouts.master')--}}
+@extends('partials.header')
 
-{{--@section('title')--}}
-    {{--Homepage--}}
-{{--@endsection--}}
+@section('title')
+    Homepage
+@endsection
 {{--@section('content')--}}
     {{--<section class="row posts">--}}
         {{--<div class="col-md-6 col-md-offset-3 abc">--}}
@@ -126,47 +126,32 @@
 
 {{--@endsection--}}
 
-@extends('layouts.master')
 
 @section('title')
     Homepage
 @endsection
-@section('content')
-    <div style="width: 100%;height:50px"></div>
-    <div class="col-sm-9" >
-        <br>
 
-            @foreach($posts as $post)
-                <div class="panel panel-default" style="padding: 20px;">
-                    <article class="post" data-postid="{{ $post->id }}">
-                    <div class="title"><h2> {{ $post->title }} </h2></div>
-                    <div class="body">
+@section('content')
+    @foreach($posts as $post)
+        <div class="panel panel-default" style="padding: 20px;">
+            <article class="post" data-postid="{{ $post->id }}">
+                <div class="title"><h2> {{ $post->title }} </h2></div>
+                <div class="body">
                     <p> {{$post->body}} </p>
-                    </div>
-                    <div class="info">
+                </div>
+                <div class="info">
                     <i class="fa fa-thumbs-up fa-2x" aria-hidden="true"></i>
                     <i class="fa fa-thumbs-down fa-2x" aria-hidden="true"></i>
-                        <br>
+                    <br>
                     <button type="button" class="btn btn-primary pull-right">Read More</button>
-                        <br><br>
-                    <p class="font-weight-light text-right" style="color: #aaa;font-style: italic"><span class="glyphicon "></span> Posted by {{ $post->user->name }}</p>
-                    <p class="font-weight-light text-right" style="color: #aaa;font-style: italic"><span class="glyphicon glyphicon-time"></span> Posted on {{ $post->created_at }}</p>
+                    <br><br>
+                    <p class="font-weight-light text-right" style=""><span class="glyphicon "></span> Posted by {{ $post->user->name }}</p>
+                    <p class="font-weight-light text-right"><span class="glyphicon glyphicon-time"></span> Posted on {{ $post->created_at }}</p>
 
 
-                        {{--Posted by {{ $post->user->name }} on {{ $post->created_at }}--}}
-                    </div>
-                    {{--<div class="interaction">--}}
-                    {{--<a href="#" class="like">Like</a>   |--}}
-                    {{--<a href="#" class="like">Dislike</a>   |--}}
-                    {{--@if(Auth::user() == $post->user)--}}
-                    {{--<a href="#" class="edit">Edit</a>   |--}}
-                    {{--<a href="#">Delete</a>--}}
-                    {{--@endif--}}
-                    {{--</div>--}}
-                    </article>
                 </div>
-            @endforeach
-    </div>
-
+            </article>
+        </div><hr>
+    @endforeach
 
 @endsection
