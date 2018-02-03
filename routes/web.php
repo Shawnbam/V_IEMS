@@ -21,10 +21,13 @@ Route::get('/Home/{type}', [
     'as' => 'home.committeefeeds'
 ]);
 
+
 Route::get('/Home', [
     'uses' => 'PostController@getHomeFeeds',
     'as' => 'home.feeds'
 ]);
+
+
 
 Route::get('/Add a Post', [
     'uses' => 'PostController@getAddPost',
@@ -40,6 +43,13 @@ Route::get('/logout',[
 Route::get('/Commitees',[
     'uses' => 'PostController@getCommittees',
     'as' => 'committee'
+]);
+
+
+
+Route::get('/Post a Query',[
+    'uses' => 'QueryController@getQueries',
+    'as' => 'qa.postquery'
 ]);
 
 
@@ -60,5 +70,76 @@ Route::post('/sign_up', [
     'uses' => 'UserController@postSignup',
     'as' => 'user.signup'
 ]);
+
+
+Route::post('/PostingQuery', [
+    'uses' => 'QueryController@postCreateQuery',
+    'as' => 'query.create'
+]);
+
+
+Route::get('/Queries', [
+    'uses' => 'QueryController@getQueryFeeds',
+    'as' => 'query.feeds'
+]);
+
+
+Route::get('/Query/{id}', [
+    'uses' => 'QueryController@getQuery',
+    'as' => 'query.view'
+]);
+
+Route::get('/Post/{id}', [
+    'uses' => 'PostController@getPost',
+    'as' => 'post.view'
+]);
+
+
+Route::get('/delete-post/{post_id}', [
+    'uses' => 'PostController@getDeletePost',
+    'as' => 'post.delete'
+]);
+
+
+Route::get('/delete-query/{query_id}', [
+    'uses' => 'QueryController@getDeleteQuery',
+    'as' => 'query.delete'
+]);
+
+
+
+Route::get('/EditPost/{post_id}', [
+    'uses' => 'PostController@postEditPost',
+    'as' => 'post.edit'
+]);
+
+
+Route::get('/EditQuery', [
+    'uses' => 'QueryController@postEditQuery',
+    'as' => 'query.edit'
+]);
+
+Route::post('/updatePost', [
+    'uses' => 'PostController@postUpdatePost',
+    'as' => 'post.update'
+]);
+
+
+Route::post('/updateQuery', [
+    'uses' => 'UserController@postUpdateQuery',
+    'as' => 'query.update'
+]);
+
+
+Route::post('/SaveComment/{post_id}/{user_id}/{uname}', [
+    'uses' => 'PcommentController@savePComment',
+    'as' => 'pcomment.save'
+]);
+
+Route::get('/DeleteComment/{pcommentid}', [
+    'uses' => 'PcommentController@deletePComment',
+    'as' => 'pcomment.delete'
+]);
+
 
 

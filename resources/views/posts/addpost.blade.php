@@ -7,8 +7,9 @@
 
 
 @section('content')
+    @include('partials.message-block')
     <section class="row new-post">
-        <div class="col-md-6 centered">
+        <div class="col-md-10 centered">
             <header>
                 <h3>What do you have to say?</h3>
             </header>

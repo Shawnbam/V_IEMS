@@ -9,9 +9,13 @@
     <meta name="author" content="">
     <title>SB Admin - Start Bootstrap Template</title>
     <!-- Bootstrap core CSS-->
+
     <link rel="stylesheet" href="{{asset('viemsvendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
     <link rel="stylesheet" href="{{asset('viemsvendor/font-awesome/css/font-awesome.min.css')}}" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="{{asset('css/sb-admin.css')}}" rel="stylesheet" >
+    <link rel="stylesheet" href="{{asset('css/body.css')}}" rel="stylesheet" >
+    <link rel="stylesheet" href="{{asset('body.css')}}" rel="stylesheet" >
+    <link rel="stylesheet" href="{{ URL::to('css/body.css') }}">
 
 </head>
 
@@ -30,11 +34,19 @@
                     <span class="nav-link-text">Add a Post</span>
                 </a>
             </li>
-            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
-                <a class="nav-link" href="#">
+            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Committees">
+                <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseCommittees" data-parent="#exampleAccordion">
                     <i class="fa fa-pencil-square-o"></i>
                     <span class="nav-link-text">Q/A Section</span>
                 </a>
+                <ul class="sidenav-second-level collapse" id="collapseCommittees">
+                    <li>
+                        <a href="{{ route('qa.postquery') }}">Post a Query</a>
+                    </li>
+                    <li>
+                        <a href="{{ route('query.feeds') }}">View Queries</a>
+                    </li>
+                </ul>
             </li>
             <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
                 <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents" data-parent="#exampleAccordion">
@@ -60,6 +72,18 @@
                 <a class="nav-link" data-toggle="collapse" href="#collapseExamplePages" data-parent="#exampleAccordion">
                     <i class="fa fa-handshake-o"></i>
                     <span class="nav-link-text">Collaborate</span>
+                </a>
+            </li>
+            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Example Pages">
+                <a class="nav-link" data-toggle="collapse" href="#collapseExamplePages" data-parent="#exampleAccordion">
+                    <i class="fa fa-folder-open-o" aria-hidden="true"></i>
+                    <span class="nav-link-text">Journals</span>
+                </a>
+            </li>
+            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Example Pages">
+                <a class="nav-link" data-toggle="collapse" href="#collapseExamplePages" data-parent="#exampleAccordion">
+                    <i class="fa fa-question" aria-hidden="true"></i>
+                    <span class="nav-link-text">Conduct a quiz</span>
                 </a>
             </li>
             <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Menu Levels">
@@ -138,10 +162,28 @@
             </li>
             <li class="breadcrumb-item active">Posts</li>
         </ol>
-        <div class="row">
-            <div class="col-10">
+        <div class="row posts">
+            <div class="col-md-9">
                 <div class="container">
                     @yield('content')
+                </div>
+            </div>
+
+
+
+            <div class="col-md-3">
+                <div class="container border" style="padding: 20px">
+                    <div class="panel panel-default">
+                        <h5>Suggested</h5>
+                        <ul>
+                            <li>Suggestion 1</li>
+                            <li>Suggestion 2</li>
+                            <li>Suggestion 3</li>
+                            <li>Suggestion 4</li>
+                            <li>Suggestion 5</li>
+
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
@@ -173,7 +215,16 @@
     <script src="{{ URL::to('viemsvendor/jquery/jquery.min.js') }}"></script>
     <script src="{{ URL::to('viemsvendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ URL::to('viemsvendor/jquery-easing/jquery.easing.min.js') }}"></script>
+
     <script src="{{ URL::to('js/sb-admin.min.js') }}"></script>
+    <script src="{{ URL::to('tinymce\js\tinymce\tinymce.min.js') }}"></script>
+    <script>
+        tinymce.init({
+            selector:'textarea',
+            plugins: "link code lists",
+            menubar:false
+        });
+    </script>
 
 </div>
 </body>
