@@ -160,15 +160,18 @@
         </div>
     </div>
     <hr>
-    <div class="row">
+    <header>Comments</header>
+    <div class="row full">
         <div class="col-md-10">
             @foreach($pcomments as $pcomment)
-                <h6>Comment by {!! strip_tags($pcomment->name) !!} - </h6>
-                <p class="lead">{!! strip_tags($pcomment->comment) !!}</p>
-                <a href="#">Like</a> |
-                <a href="#">Disike</a> |
-                <a href="{{ route('pcomment.delete',['pcommentid' => $pcomment->id]) }}">Delete</a>
-                <hr>
+                <article class="partial">
+                    <h6>Comment by {!! ($pcomment->name) !!} - </h6>
+                    <p class="lead">{!! ($pcomment->comment) !!}</p>
+                    <a href="#">Like</a> |
+                    <a href="#">Disike</a> |
+                    <a href="{{ route('pcomment.delete',['pcommentid' => $pcomment->id]) }}">Delete</a>
+                    <hr>
+                </article>
             @endforeach
         </div>
     </div>

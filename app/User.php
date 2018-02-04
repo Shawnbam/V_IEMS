@@ -20,4 +20,8 @@ class User extends Model implements Authenticatable
     public function pcomments(){
         return $this->hasMany('App\Pcomment');
     }
+
+    public function plikes(){
+        return $this->hasMany('App\Plike');
+    }
 }

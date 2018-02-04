@@ -136,14 +136,14 @@
             @foreach($posts as $post)
                 <article class="post panel panel-default" data-postid="{{ $post->id }}">
                     <b>{{ $post->title }}</b> :-
-                    <p class="lead"> {!! $post->body !!} </p>
+                    <p class="lead" style="word-wrap: normal;"> {!! $post->body !!} </p>
                     {{--<p> {{ substr(strip_tags($post->body),0,10) }}{{ strlen(strip_tags($post->body)) >10 ? "..." : "" }} </p>--}}
                     <div class="info">
                         Posted by {{ $post->user->first_name }} on {{ $post->created_at }}
                     </div>
                     <div class="interaction">
-                        <a href="#" class="like">Like</a>   |
-                        <a href="#" class="like">Dislike</a>   |
+                        <a href="#" class="like">{{ Auth::user()->plikes()->where('post_id', $post->id)->first() ? Auth::user()->plikes()->where('post_id', $post->id)->first()->like == 1 ? 'Liked' : 'Like' : 'Like' }}</a>   |
+                        <a href="#" class="like">{{ Auth::user()->plikes()->where('post_id', $post->id)->first() ? Auth::user()->plikes()->where('post_id', $post->id)->first()->like == 0 ? 'Disliked' : 'Dislike' : 'Dislike' }}</a>   |
                         @if(Auth::user() == $post->user)
                             <a href="{{ route('post.edit', ['post_id' => $post->id]) }}" class="edit">Edit</a>   |
                             <a href="{{ route('post.delete',['post_id' => $post->id]) }}">Delete</a> |
@@ -152,4 +152,9 @@
                     </div>
                 </article>
             @endforeach
+    <script>
+        var token = ' {{ Session::token() }} ';
+        var urlLike = ' {{ route('like') }} ';
+    </script>
+
 @endsection

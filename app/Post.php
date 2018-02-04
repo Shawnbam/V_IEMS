@@ -14,4 +14,8 @@ class Post extends Model
     public function pcomments(){
         return $this->hasMany('App\Pcomment');
     }
+
+    public function plikes(){
+        return $this->hasMany('App\Plike');
+    }
 }

@@ -136,10 +136,15 @@ Route::post('/SaveComment/{post_id}/{user_id}/{uname}', [
     'as' => 'pcomment.save'
 ]);
 
+
 Route::get('/DeleteComment/{pcommentid}', [
     'uses' => 'PcommentController@deletePComment',
     'as' => 'pcomment.delete'
 ]);
 
 
+Route::post('/like',[
+    'uses' => 'PostController@postLikePost',
+    'as' => 'like'
+]);
 

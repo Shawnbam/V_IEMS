@@ -6,6 +6,7 @@ use App\Post;
 use App\Pcomment;
 use Illuminate\Http\Request;
 use App\User;
+use App\Plike;
 use Auth;
 use Illuminate\Support\Facades\Input;
 
@@ -147,5 +148,53 @@ class PostController extends Controller{
         }
             return redirect()->back();
     }
+
+
+    public function postLikePost(Request $request){
+        $post_Id = $request['postId'];
+        $is_Like = $request['isLike'] === 'true';
+        $update = false;
+        $post_Id = $post_Id;
+        $post = Post::find($post_Id);
+
+
+        if(!$post){
+            return null;
+        }
+
+        $user = Auth::user();
+        $like = $user->plikes()->where('post_id', $post_Id)->first();
+        //echo $like->like;
+       // dd($like->like);
+        //dd($user->plikes()->where('post_id', $post_Id)->first()->like);
+
+        //dd($like);
+        if($like){
+            $already_like = $like->like;
+            $update = true;
+
+            if($already_like == $is_Like){
+                $like->delete();
+                return null;
+            }
+        } else {
+            $like = new Plike();
+
+        }
+        $like->like = $is_Like;
+        $like->user_id = $user->id;
+        $like->post_id = $post->id;
+        //dd($user->id );
+        if($update){
+            $like->update();
+            //dd('he');
+        } else {
+            $like->save();
+            //dd('he1');
+        }
+        //return 'bumm';
+        return null;
+    }
+
 
 }

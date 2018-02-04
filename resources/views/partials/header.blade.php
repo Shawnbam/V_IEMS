@@ -212,9 +212,13 @@
         </div>
     </div>
     <!-- Bootstrap core JavaScript-->
-    <script src="{{ URL::to('viemsvendor/jquery/jquery.min.js') }}"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous"></script>
+    {{--<script src="https://code.jquery.com/jquery-migrate-3.0.1.js" integrity="sha256-VvnF+Zgpd00LL73P2XULYXEn6ROvoFaa/vbfoiFlZZ4=" crossorigin="anonymous"></script>--}}
+
+    {{--<script src="{{ URL::to('viemsvendor/jquery/jquery.min.js') }}"></script>--}}
     <script src="{{ URL::to('viemsvendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ URL::to('viemsvendor/jquery-easing/jquery.easing.min.js') }}"></script>
+    <script src="{{ URL::to('js/appmain.js') }}"></script>
 
     <script src="{{ URL::to('js/sb-admin.min.js') }}"></script>
     <script src="{{ URL::to('tinymce\js\tinymce\tinymce.min.js') }}"></script>

@@ -10,8 +10,10 @@ use App\User;
 use Auth;
 use Illuminate\Support\Facades\Input;
 
-class PcommentController extends Controller{
-    public function savePComment(Request $request, $post_id, $user_id, $uname){
+class PcommentController extends Controller
+{
+    public function savePComment(Request $request, $post_id, $user_id, $uname)
+    {
         $this->validate($request, array(
             'comment' => 'required'
         ));
@@ -30,7 +32,8 @@ class PcommentController extends Controller{
         return redirect()->back();
     }
 
-    public function deletePComment($pcommentid){
+    public function deletePComment($pcommentid)
+    {
         $pcomment = Pcomment::where('id', $pcommentid);
 
         $pcomment->delete();
