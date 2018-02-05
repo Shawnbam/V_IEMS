@@ -19,6 +19,8 @@ class CreatePostsTable extends Migration
             $table->string('title');
             $table->text('body');
             $table->string('type');
+            $table->integer('plikecnt');
+            $table->integer('pdislikecnt');
             $table->integer('user_id');
         });
     }

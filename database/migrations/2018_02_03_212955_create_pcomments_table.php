@@ -19,6 +19,8 @@ class CreatePcommentsTable extends Migration
             $table->text('comment');
             $table->string('name');
             $table->boolean('approved');
+            $table->integer('pclikecnt');
+            $table->integer('pcdislikecnt');
 
             $table->integer('post_id')->unsigned();
             $table->integer('user_id')->unsigned();

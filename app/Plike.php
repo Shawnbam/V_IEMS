@@ -11,6 +11,6 @@ class Plike extends Model
     }
 
     public function post() {
-        return $this->belongsTo('App\Post ');
+        return $this->belongsTo('App\Post');
     }
 }

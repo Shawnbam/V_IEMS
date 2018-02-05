@@ -138,11 +138,13 @@
         <p class="lead"> {!! $post->body !!} </p>
         {{--<p> {{ substr(strip_tags($post->body),0,10) }}{{ strlen(strip_tags($post->body)) >10 ? "..." : "" }} </p>--}}
         <div class="info">
-            Posted by {{ $post->user->first_name }} on {{ $post->created_at }}
+            Posted by {{ $post->user->name }} on {{ $post->created_at }}
         </div>
         <div class="interaction">
-            <a href="#" class="like">Like</a>   |
-            <a href="#" class="like">Dislike</a>   |
+            <div class="likecnt">{{ $post->plikecnt }}</div>
+            <a href="#" class="plike">{{ Auth::user()->plikes()->where('post_id', $post->id)->first() ? Auth::user()->plikes()->where('post_id', $post->id)->first()->like == 1 ? 'Liked' : 'Like' : 'Like' }}</a>   |
+            <div class="dislikecnt">{{ $post->pdislikecnt }}</div>
+            <a href="#" class="plike">{{ Auth::user()->plikes()->where('post_id', $post->id)->first() ? Auth::user()->plikes()->where('post_id', $post->id)->first()->like == 0 ? 'Disliked' : 'Dislike' : 'Dislike' }}</a>   |
             @if(Auth::user() == $post->user)
                 <a href="#" class="edit">Edit</a>   |
                 <a href="{{ route('post.delete',['post_id' => $post->id]) }}">Delete</a>
@@ -164,15 +166,29 @@
     <div class="row full">
         <div class="col-md-10">
             @foreach($pcomments as $pcomment)
-                <article class="partial">
+                <article class="partial" data-postid="{{ $post->id }}" data-pcommentid="{{ $pcomment->id }}">
                     <h6>Comment by {!! ($pcomment->name) !!} - </h6>
                     <p class="lead">{!! ($pcomment->comment) !!}</p>
-                    <a href="#">Like</a> |
-                    <a href="#">Disike</a> |
+
+
+                    <div class="interaction">
+                        <div class="likecnt">{{ $pcomment->pclikecnt }}</div>
+                        {{--<a href="#" class="pclike">Like</a>   |--}}
+                        <a href="#" class="pclike">{{ Auth::user()->pclikes()->where('pcomment_id', $pcomment->id)->first() ? Auth::user()->pclikes()->where('pcomment_id', $pcomment->id)->first()->like == 1 ? 'Liked' : 'Like' : 'Like' }}</a>   |
+                        <div class="dislikecnt">{{ $pcomment->pcdislikecnt }}</div>
+                        {{--<a href="#" class="pclike">Dislike</a> |--}}
+                        <a href="#" class="pclike">{{ Auth::user()->pclikes()->where('pcomment_id', $pcomment->id)->first() ? Auth::user()->pclikes()->where('pcomment_id', $pcomment->id)->first()->like == 0 ? 'Disliked' : 'Dislike' : 'Dislike' }}</a>   |
+                    </div>
+
                     <a href="{{ route('pcomment.delete',['pcommentid' => $pcomment->id]) }}">Delete</a>
                     <hr>
                 </article>
             @endforeach
         </div>
     </div>
+    <script>
+        var token = ' {{ Session::token() }} ';
+        var urlLike = ' {{ route('plike') }} ';
+        var urlCLike = ' {{ route('pclike') }} ';
+    </script>
 @endsection

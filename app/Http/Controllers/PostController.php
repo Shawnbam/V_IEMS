@@ -48,26 +48,26 @@ class PostController extends Controller{
         //$posts = Post::orderBy('created_at','desc')->get();
         return view('posts.committee', ['postscsi' => $postscsi , 'postsitsa' => $postsitsa , 'postsacm' => $postsacm , 'postsiee' => $postsiee]);
     }
-/*
- *
-        $posts = Post::where('type', '=', Auth::user()->type)
-            ->orderBy('created_at','desc')
-            ->get();
-        $postsiee = Post::where('type', '=', 'ieee')
-            ->orderBy('created_at','desc')
-            ->get();
-        $postsacm = Post::where('type', '=', 'acm')
-            ->orderBy('created_at','desc')
-            ->get();
-        $postsitsa = Post::where('type', '=', 'itsa')
-            ->orderBy('created_at','desc')
-            ->get();
-        $postscsi = Post::where('type', '=', 'csi')
-            ->orderBy('created_at','desc')
-            ->get();
-        //$posts = Post::orderBy('created_at','desc')->get();
-        return view('home.hompg', ['posts' => $posts , 'postscsi' => $postscsi , 'postsitsa' => $postsitsa , 'postsacm' => $postsacm , 'postsiee' => $postsiee]);
-*/
+    /*
+     *
+            $posts = Post::where('type', '=', Auth::user()->type)
+                ->orderBy('created_at','desc')
+                ->get();
+            $postsiee = Post::where('type', '=', 'ieee')
+                ->orderBy('created_at','desc')
+                ->get();
+            $postsacm = Post::where('type', '=', 'acm')
+                ->orderBy('created_at','desc')
+                ->get();
+            $postsitsa = Post::where('type', '=', 'itsa')
+                ->orderBy('created_at','desc')
+                ->get();
+            $postscsi = Post::where('type', '=', 'csi')
+                ->orderBy('created_at','desc')
+                ->get();
+            //$posts = Post::orderBy('created_at','desc')->get();
+            return view('home.hompg', ['posts' => $posts , 'postscsi' => $postscsi , 'postsitsa' => $postsitsa , 'postsacm' => $postsacm , 'postsiee' => $postsiee]);
+    */
 
     public function getAddPost(){
         return view('posts.addpost');
@@ -77,13 +77,16 @@ class PostController extends Controller{
 
         $this->validate($request,[
             'title' => 'required',
-           'body' => 'required|max:500'
+            'body' => 'required|max:500'
         ]);
 
         $post = new Post();
         $post->title = $request['title'];
         $post->body = $request['body'];
         $post->type = 'common';
+        $post->plikecnt = 0;
+        $post->pdislikecnt= 0;
+
         if($request->user()->posts()->save($post)){
             $message = 'Post successfully Created';
         }
@@ -146,7 +149,7 @@ class PostController extends Controller{
             $message = 'Post updated';
             return redirect()->route('home.feeds')->with(['message' => $message]);
         }
-            return redirect()->back();
+        return redirect()->back();
     }
 
 
@@ -156,44 +159,74 @@ class PostController extends Controller{
         $update = false;
         $post_Id = $post_Id;
         $post = Post::find($post_Id);
-
-
         if(!$post){
             return null;
         }
-
         $user = Auth::user();
         $like = $user->plikes()->where('post_id', $post_Id)->first();
+        $plikecnt = Post::where('id', $post_Id)->first();
+        $pdislikecnt = Post::where('id', $post_Id)->first();
         //echo $like->like;
-       // dd($like->like);
+        // dd($like->like);
         //dd($user->plikes()->where('post_id', $post_Id)->first()->like);
 
         //dd($like);
+        if($like){//like or dislike present
+            if($is_Like && !($like->like)){//clicked like and already disliked
+                $plikecnt->plikecnt = $plikecnt->plikecnt + 1;
+                $pdislikecnt->pdislikecnt = $pdislikecnt->pdislikecnt - 1;
+                //echo ('here1');
+            }
+            else if($is_Like && $like->like){//clicked like and already liked
+                $plikecnt->plikecnt = $plikecnt->plikecnt - 1;
+                //echo ('here2');
+            }
+            else if(!($is_Like) && !($like->like)){//clicked dislike and already disliked
+                $pdislikecnt->pdislikecnt = $pdislikecnt->pdislikecnt - 1;
+                //echo ('here3');
+            }
+            else if(!($is_Like) && $like->like){//clicked dislike and already liked
+                $plikecnt->plikecnt = $plikecnt->plikecnt - 1;
+                $pdislikecnt->pdislikecnt = $pdislikecnt->pdislikecnt + 1;
+                //echo ('here4');
+            }
+        }
+        else{
+            if($is_Like)
+                $plikecnt->plikecnt = $plikecnt->plikecnt + 1;
+            else
+                $pdislikecnt->pdislikecnt = $pdislikecnt->pdislikecnt + 1;
+        }
         if($like){
             $already_like = $like->like;
             $update = true;
-
             if($already_like == $is_Like){
+//                $plikecnt->plikecnt = 0;
+//                $pdislikecnt->pdislikecnt = 0;
+                $plikecnt->update();
+                $pdislikecnt->update();
                 $like->delete();
-                return null;
+                return response()->json(['plikecnt' => $plikecnt->plikecnt, 'pdislikecnt' => $pdislikecnt->pdislikecnt],200);
             }
         } else {
             $like = new Plike();
-
         }
+        //echo $pdislikecnt->pdislikecnt;
         $like->like = $is_Like;
         $like->user_id = $user->id;
         $like->post_id = $post->id;
         //dd($user->id );
         if($update){
             $like->update();
-            //dd('he');
+            //echo ('he');
         } else {
             $like->save();
-            //dd('he1');
+            //echo ('he1');
         }
+        $plikecnt->update();
+        $pdislikecnt->update();
         //return 'bumm';
-        return null;
+        return response()->json(['plikecnt' => $plikecnt->plikecnt, 'pdislikecnt' => $pdislikecnt->pdislikecnt],200);
     }
 
 

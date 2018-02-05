@@ -24,4 +24,8 @@ class User extends Model implements Authenticatable
     public function plikes(){
         return $this->hasMany('App\Plike');
     }
+
+    public function pclikes(){
+        return $this->hasMany('App\PClike');
+    }
 }

@@ -199,6 +199,8 @@
     <script src="{{ URL::to('viemsvendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ URL::to('viemsvendor/jquery-easing/jquery.easing.min.js') }}"></script>
 
+    <script src="{{ URL::to('js/appmain.js') }}"></script>
+
     <script src="{{ URL::to('js/sb-admin.min.js') }}"></script>
     <script src="{{ URL::to('tinymce\js\tinymce\tinymce.min.js') }}"></script>
     <script>

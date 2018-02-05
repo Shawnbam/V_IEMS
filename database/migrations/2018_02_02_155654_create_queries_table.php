@@ -19,6 +19,9 @@ class CreateQueriesTable extends Migration
             $table->string('qtitle');
             $table->text('qbody');
             $table->string('qtype');
+            $table->integer('qlikecnt');
+            $table->integer('qdislikecnt');
+
             $table->integer('user_id');
         });
     }

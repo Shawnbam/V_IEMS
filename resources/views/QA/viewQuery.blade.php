@@ -138,7 +138,7 @@
         <p class="lead"> {!! $query->qbody !!} </p>
         {{--<p> {{ substr(strip_tags($post->body),0,10) }}{{ strlen(strip_tags($post->body)) >10 ? "..." : "" }} </p>--}}
         <div class="info">
-            Posted by {{ $query->user->first_name }} on {{ $query->created_at }}
+            Posted by {{ $query->user->name }} on {{ $query->created_at }}
         </div>
         <div class="interaction">
             <a href="#" class="like">Like</a>   |

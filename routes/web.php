@@ -143,8 +143,13 @@ Route::get('/DeleteComment/{pcommentid}', [
 ]);
 
 
-Route::post('/like',[
+Route::post('/postlike',[
     'uses' => 'PostController@postLikePost',
-    'as' => 'like'
+    'as' => 'plike'
 ]);
 
+
+Route::post('/postcommentlike',[
+    'uses' => 'PcommentController@postLikeCPost',
+    'as' => 'pclike'
+]);
