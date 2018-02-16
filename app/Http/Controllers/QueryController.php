@@ -27,6 +27,8 @@ class QueryController extends Controller{
         $query ->qtitle = $request['title'];
         $query ->qbody = $request['body'];
         $query ->qtype = 'common';
+        $query ->qlikecnt = 0;
+        $query ->qdislikecnt = 0;
         if($request->user()->queries()->save($query )){
 
             $message = 'Query successfully posted';

@@ -29,6 +29,25 @@ Route::get('/Home', [
 
 
 
+Route::get('/AttemptQuiz', [
+    'uses' => 'StudentController@index',
+    'as' => 'giveq'
+]);
+
+
+Route::post('/Quiz',[
+    'uses' => 'StudentController@store',
+    'as' => 'quizpage'
+]);
+
+
+Route::post('/saveanswer', [
+    'uses' => 'AnswerController@store',
+    'as' => 'answer.store'
+]);
+
+
+
 Route::get('/Add a Post', [
     'uses' => 'PostController@getAddPost',
     'as' => 'posts.addpost'
@@ -128,6 +147,24 @@ Route::post('/updatePost', [
 Route::post('/updateQuery', [
     'uses' => 'UserController@postUpdateQuery',
     'as' => 'query.update'
+]);
+
+
+Route::post('/store', [
+    'uses' => 'QuizController@store',
+    'as' => 'quiz.store'
+]);
+
+
+Route::post('/qstore/{cnt}', [
+    'uses' => 'QuizController@qstore',
+    'as' => 'qstore'
+]);
+
+
+Route::get('/Create Quiz', [
+    'uses' => 'QuizController@getQuiz',
+    'as' => 'quiz.get'
 ]);
 
 

@@ -80,12 +80,28 @@
                     <span class="nav-link-text">Journals</span>
                 </a>
             </li>
-            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Example Pages">
-                <a class="nav-link" data-toggle="collapse" href="#collapseExamplePages" data-parent="#exampleAccordion">
+
+            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Quiz">
+                <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseQuiz" data-parent="#exampleAccordion">
                     <i class="fa fa-question" aria-hidden="true"></i>
-                    <span class="nav-link-text">Conduct a quiz</span>
+                    <span class="nav-link-text">Quiz</span>
                 </a>
+                <ul class="sidenav-second-level collapse" id="collapseQuiz">
+                    <li>
+                        <a class="nav-link" href="{{ route('quiz.get') }}">
+                            <i class="fa fa-question-circle" aria-hidden="true"></i>
+                            <span class="nav-link-text">Create a Quiz</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="nav-link" href="{{ route('giveq') }}">
+                            <i class="fa fa-exclamation-circle"></i>
+                            <span class="nav-link-text">Attempt</span>
+                        </a>
+                    </li>
+                </ul>
             </li>
+
             <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Menu Levels">
                 <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseMulti" data-parent="#exampleAccordion">
                     <i class="fa fa-shopping-cart"></i>
@@ -229,8 +245,47 @@
             menubar:false
         });
     </script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+        });
 
+        $('.ansform').on('submit',function(e){
+            var form = $(this);
+            var submit = form.find("[type=submit]");
+            var submitOriginalText = submit.attr("value");
+
+            e.preventDefault();
+            var data = form.serialize();
+            var url = form.attr('action');
+            var post = form.attr('method');
+            $.ajax({
+                type : post,
+                url : url,
+                data :data,
+                success:function(data){
+                    submit.attr("value", "Submitted");
+                },
+                beforeSend: function(){
+                    submit.attr("value", "Loading...");
+                    submit.prop("disabled", true);
+                },
+                error: function() {
+                    submit.attr("value", submitOriginalText);
+                    submit.prop("disabled", false);
+                    // show error to end user
+                }
+            })
+        })
+    </script>
+
+    @yield('script')
 </div>
+
 </body>
 
 </html>
