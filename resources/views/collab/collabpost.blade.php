@@ -1,5 +1,8 @@
 @extends('partials.header')
 
+@section('title')
+    Homepage
+@endsection
 {{--@section('content')--}}
 {{--<section class="row posts">--}}
 {{--<div class="col-md-6 col-md-offset-3 abc">--}}
@@ -125,35 +128,23 @@
 
 
 @section('title')
-    Homepage
+    Collaborate
 @endsection
 
 @section('content')
     @include('partials.message-block')
-            @foreach($posts as $post)
-                <article class="post panel panel-default" data-postid="{{ $post->id }}">
-                    <b>{{ $post->title }}</b> :-
-                    <p class="lead" style="word-wrap: normal;"> {!! $post->body !!} </p>
-                    {{--<p> {{ substr(strip_tags($post->body),0,10) }}{{ strlen(strip_tags($post->body)) >10 ? "..." : "" }} </p>--}}
-                    <div class="info">
-                        Posted by {{ $post->user->name }} on {{ $post->created_at }}
-                    </div>
-                    <div class="interaction">
-                        <div class="likecnt">{{ $post->plikecnt }}</div>
-                        <a href="#" class="plike">{{ Auth::user()->plikes()->where('post_id', $post->id)->first() ? Auth::user()->plikes()->where('post_id', $post->id)->first()->like == 1 ? 'Liked' : 'Like' : 'Like' }}</a>   |
-                        <div class="dislikecnt">{{ $post->pdislikecnt }}</div>
-                        <a href="#" class="plike">{{ Auth::user()->plikes()->where('post_id', $post->id)->first() ? Auth::user()->plikes()->where('post_id', $post->id)->first()->like == 0 ? 'Disliked' : 'Dislike' : 'Dislike' }}</a>   |
-                        @if(Auth::user() == $post->user)
-                            <a href="{{ route('post.edit', ['post_id' => $post->id]) }}" class="edit">Edit</a>   |
-                            <a href="{{ route('post.delete',['post_id' => $post->id]) }}">Delete</a> |
-                        @endif
-                        <a href="{{ route('post.view',['post_id' => $post->id]) }}">Read more</a>
-                    </div>
-                </article>
-            @endforeach
-    <script>
-        var token = ' {{ Session::token() }} ';
-        var urlLike = ' {{ route('plike') }} ';
-    </script>
-
+    <form method="POST" action="{{ route('collab.save') }}">
+        <div class="container">
+            <div class="form-group">
+                <label for="title">Title :</label><br>
+                <input class="form-control col-md-6" type="text" name="title" id="title">
+            </div>
+            <div class="form-group">
+                <label for="idea">Idea :</label><br>
+                <textarea class="form-control" type="text" rows="15" name="idea" id="idea"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Post the IDEA</button>
+        </div>
+        {{ csrf_field() }}
+    </form>
 @endsection

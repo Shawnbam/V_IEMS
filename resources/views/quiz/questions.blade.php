@@ -1,6 +1,7 @@
 @extends('partials.header')
 
 @section('content')
+    <strong>Unique Code for this test is {{ $uniqueid }} <small>(Also viewable in my quiz)</small></strong>
     <h2>Enter the questions below.</h2>
     <form action="{{ route('qstore',['cnt' => $cnt])}}" method="post">
         @foreach($arr as $a)

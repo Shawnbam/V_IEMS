@@ -8,6 +8,12 @@ use App\User;
 use Auth;
 
 class UserController extends Controller{
+
+    public function getProfile(){
+        $results = Auth::user();
+        return view('user.profile')->with(['results' => $results]);
+    }
+
     public function getSignin(){
         return view('user.signin');
     }

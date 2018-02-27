@@ -39,7 +39,7 @@ class StudentController extends Controller
 
             $id=$request->input('exam_code');
             $studentRealId=$request->input('student_id');
-            $student_id=Student::where('student_id',$studentRealId)->value('id');
+            $student_id=Student::where('student_id',$studentRealId)->where('uniqueid',$id)->value('id');
             $findcourse= Examinfo::where('uniqueid',$id)->value('id');
 
             $len= Examinfo::where('uniqueid',$id)->first();

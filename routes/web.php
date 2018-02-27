@@ -16,6 +16,13 @@ Route::get('/', [
     'as' => 'home'
 ]);
 
+
+Route::get('/Profile', [
+    'uses' => 'UserController@getProfile',
+    'as' => 'myprofile'
+]);
+
+
 Route::get('/Home/{type}', [
     'uses' => 'PostController@getCommitteesFeeds',
     'as' => 'home.committeefeeds'
@@ -28,11 +35,23 @@ Route::get('/Home', [
 ]);
 
 
-
 Route::get('/AttemptQuiz', [
     'uses' => 'StudentController@index',
     'as' => 'giveq'
 ]);
+
+
+Route::get('/YourQuiz', [
+    'uses' => 'QuizController@getYourQuiz',
+    'as' => 'getyourquiz'
+]);
+
+
+Route::get('/Results/{uniqueid}', [
+    'uses' => 'QuizController@getResults',
+    'as' => 'getresults'
+]);
+
 
 
 Route::post('/Quiz',[
@@ -47,11 +66,11 @@ Route::post('/saveanswer', [
 ]);
 
 
-
 Route::get('/Add a Post', [
     'uses' => 'PostController@getAddPost',
     'as' => 'posts.addpost'
 ]);
+
 
 Route::get('/logout',[
     'uses' => 'UserController@getLogout',
@@ -63,7 +82,6 @@ Route::get('/Commitees',[
     'uses' => 'PostController@getCommittees',
     'as' => 'committee'
 ]);
-
 
 
 Route::get('/Post a Query',[
@@ -82,7 +100,6 @@ Route::post('/CreatingPost', [
     'uses' => 'PostController@postCreatePost',
     'as' => 'post.create'
 ]);
-
 
 
 Route::post('/sign_up', [
@@ -108,6 +125,7 @@ Route::get('/Query/{id}', [
     'as' => 'query.view'
 ]);
 
+
 Route::get('/Post/{id}', [
     'uses' => 'PostController@getPost',
     'as' => 'post.view'
@@ -120,13 +138,6 @@ Route::get('/delete-post/{post_id}', [
 ]);
 
 
-Route::get('/delete-query/{query_id}', [
-    'uses' => 'QueryController@getDeleteQuery',
-    'as' => 'query.delete'
-]);
-
-
-
 Route::get('/EditPost/{post_id}', [
     'uses' => 'PostController@postEditPost',
     'as' => 'post.edit'
@@ -137,6 +148,7 @@ Route::get('/EditQuery', [
     'uses' => 'QueryController@postEditQuery',
     'as' => 'query.edit'
 ]);
+
 
 Route::post('/updatePost', [
     'uses' => 'PostController@postUpdatePost',
@@ -177,6 +189,29 @@ Route::post('/SaveComment/{post_id}/{user_id}/{uname}', [
 Route::get('/DeleteComment/{pcommentid}', [
     'uses' => 'PcommentController@deletePComment',
     'as' => 'pcomment.delete'
+]);
+
+
+Route::get('/Collaborate', [
+    'uses' => 'CollaborateController@getCollaborateView',
+    'as' => 'collaborate.view'
+]);
+
+Route::get('/PostYourIdea', [
+    'uses' => 'CollaborateController@getCollaboratePost',
+    'as' => 'collab.post'
+]);
+
+
+Route::post('/PostIdea',[
+    'uses' => 'CollaborateController@postCollabSave',
+    'as' => 'collab.save'
+]);
+
+
+Route::get('/Collaboratewith/{collab_id}', [
+    'uses' => 'CollaborateController@getCollaboratewith',
+    'as' => 'collab.with'
 ]);
 
 

@@ -6,6 +6,7 @@ use App\Post;
 use App\Examinfo;
 use App\Query;
 use App\Question;
+use App\Student;
 use Illuminate\Http\Request;
 use App\User;
 use Auth;
@@ -13,11 +14,26 @@ use Illuminate\Support\Facades\Input;
 
 class QuizController extends Controller{
 
+    public function getYourQuiz(){
+        $myid = Auth::user()->id;
+        $results = Examinfo::where('Teacher_id', '=', $myid)->get();
+        //dd($results);
+        return view('quiz.myquiz')->with(['results' => $results, 'ctr' => 1]);
+    }
+
+    public function getResults($uniqueid){
+        $myid = Auth::user()->id;
+        $results = Student::where('uniqueid', '=', $uniqueid)->get();
+        return view('quiz.results')->with(['results' => $results, 'ctr' => 1]);
+    }
+
     public function getQuiz(){
         //bum check if user is teacher
         $teacher_id = Auth::user()->id;
         return view('quiz.createq')->with(['teacher_id' => $teacher_id]);
     }
+
+
     public function store(Request $request){
         $examinfo = Examinfo::create([
             'Teacher_id' => Auth::user()->id,
@@ -31,11 +47,12 @@ class QuizController extends Controller{
         for ($i = 0; $i < $request->input('question_lenth'); $i++)
             $arr[] = $i + 1;
 
-        return view('quiz.questions', ['examinfo' => $examinfo, 'arr' => $arr, 'cnt' => $cnt]);
+        return view('quiz.questions', ['examinfo' => $examinfo, 'arr' => $arr, 'cnt' => $cnt, 'uniqueid' => $request->input('uniqueid')]);
     }
 
 
     public function qstore(Request $request,$cnt){
+        $uniqueid = $request->input('uniqueid');
         $txt = $request->input('txt');
         $o1 = $request->input('o1');
         $o2 = $request->input('o2');

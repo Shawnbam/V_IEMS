@@ -28,6 +28,12 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
+            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Profile">
+                <a class="nav-link" href="{{ route('myprofile') }}">
+                    <i class="fa fa-user-circle"></i>
+                    <span class="nav-link-text">Profile</span>
+                </a>
+            </li>
             <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
                 <a class="nav-link" href="{{ route('posts.addpost') }}">
                     <i class="fa fa-plus"></i>
@@ -69,7 +75,7 @@
                 </ul>
             </li>
             <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Example Pages">
-                <a class="nav-link" data-toggle="collapse" href="#collapseExamplePages" data-parent="#exampleAccordion">
+                <a class="nav-link" href="{{ route('collaborate.view') }}">
                     <i class="fa fa-handshake-o"></i>
                     <span class="nav-link-text">Collaborate</span>
                 </a>
@@ -88,9 +94,9 @@
                 </a>
                 <ul class="sidenav-second-level collapse" id="collapseQuiz">
                     <li>
-                        <a class="nav-link" href="{{ route('quiz.get') }}">
+                        <a class="nav-link" href="{{ route('getyourquiz') }}">
                             <i class="fa fa-question-circle" aria-hidden="true"></i>
-                            <span class="nav-link-text">Create a Quiz</span>
+                            <span class="nav-link-text">My Quiz</span>
                         </a>
                     </li>
                     <li>
@@ -172,12 +178,12 @@
 <div class="content-wrapper">
     <div class="container-fluid">
         <!-- Breadcrumbs-->
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item">
-                <a href="{{ route('home.feeds') }}">Home</a>
-            </li>
-            <li class="breadcrumb-item active">Posts</li>
-        </ol>
+        {{--<ol class="breadcrumb">--}}
+            {{--<li class="breadcrumb-item">--}}
+                {{--<a href="{{ route('home.feeds') }}">Home</a>--}}
+            {{--</li>--}}
+            {{--<li class="breadcrumb-item active">Posts</li>--}}
+        {{--</ol>--}}
         <div class="row posts">
             <div class="col-md-9">
                 <div class="container">
@@ -187,21 +193,21 @@
 
 
 
-            <div class="col-md-3">
-                <div class="container border" style="padding: 20px">
-                    <div class="panel panel-default">
-                        <h5>Suggested</h5>
-                        <ul>
-                            <li>Suggestion 1</li>
-                            <li>Suggestion 2</li>
-                            <li>Suggestion 3</li>
-                            <li>Suggestion 4</li>
-                            <li>Suggestion 5</li>
+            {{--<div class="col-md-3">--}}
+                {{--<div class="container border" style="padding: 20px">--}}
+                    {{--<div class="panel panel-default">--}}
+                        {{--<h5>Suggested</h5>--}}
+                        {{--<ul>--}}
+                            {{--<li>Suggestion 1</li>--}}
+                            {{--<li>Suggestion 2</li>--}}
+                            {{--<li>Suggestion 3</li>--}}
+                            {{--<li>Suggestion 4</li>--}}
+                            {{--<li>Suggestion 5</li>--}}
 
-                        </ul>
-                    </div>
-                </div>
-            </div>
+                        {{--</ul>--}}
+                    {{--</div>--}}
+                {{--</div>--}}
+            {{--</div>--}}
         </div>
     </div>
 

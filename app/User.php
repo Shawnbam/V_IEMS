@@ -28,4 +28,8 @@ class User extends Model implements Authenticatable
     public function pclikes(){
         return $this->hasMany('App\PClike');
     }
+
+    public function collaborates(){
+        return $this->hasMany('App\Collaborate');
+    }
 }
