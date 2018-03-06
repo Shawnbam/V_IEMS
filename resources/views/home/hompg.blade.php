@@ -134,7 +134,6 @@
                 <article class="post panel panel-default" data-postid="{{ $post->id }}">
                     <b>{{ $post->title }}</b> :-
                     <p class="lead" style="word-wrap: normal;"> {!! $post->body !!} </p>
-                    {{--<p> {{ substr(strip_tags($post->body),0,10) }}{{ strlen(strip_tags($post->body)) >10 ? "..." : "" }} </p>--}}
                     <div class="info">
                         Posted by {{ $post->user->name }} on {{ $post->created_at }}
                     </div>

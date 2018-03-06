@@ -133,7 +133,7 @@
 
 @section('content')
     @include('partials.message-block')
-    <article class="post panel panel-default" data-postid="{{ $query->id }}">
+    <article class="post panel panel-default" data-queryid="{{ $query->id }}">
         <b>{{ $query->qtitle }}</b> :-
         <p class="lead"> {!! $query->qbody !!} </p>
         {{--<p> {{ substr(strip_tags($post->body),0,10) }}{{ strlen(strip_tags($post->body)) >10 ? "..." : "" }} </p>--}}
@@ -141,13 +141,54 @@
             Posted by {{ $query->user->name }} on {{ $query->created_at }}
         </div>
         <div class="interaction">
-            <a href="#" class="like">Like</a>   |
-            <a href="#" class="like">Disike</a>   |
+            <div class="likecnt">{{$query->qlikecnt}}</div>
+            <a href="#" class = "qlike">{{Auth::user()->likes()->where('query_id',$query->id)->first()? Auth::user()->likes()->where('query_id',$query->id)->first()->qlike == 1 ? 'Liked' : 'Like' : 'Like'}}</a> |
+            <div class="dislikecnt">{{$query->qdislikecnt}}</div>
+            <a href="#" class = "qlike">{{Auth::user()->likes()->where('query_id',$query->id)->first()? Auth::user()->likes()->where('query_id',$query->id)->first()->qlike == 0 ? 'Disliked' : 'Dislike' : 'Dislike'}}</a>
             @if(Auth::user() == $query->user)
-                <a href="{{ route('query.edit') }}" class="edit">Edit</a>   |
+                |   <a href="{{ route('query.edit') }}" class="edit">Edit</a>   |
                 <a href="{{ route('query.delete', ['query_id' => $query->id]) }}">Delete</a>
             @endif
         </div>
     </article>
 
+    <div class="row">
+        <div class="col-md-10">
+            <form action="{{ route('qcomment.save', ['query_id' => $query->id, 'user_id' => Auth::user()->id, 'uname' => Auth::user()->name]) }}" method="post">
+                <textarea class="form-control" placeholder="Enter Description" class="form-control" rows="5" id="comment" name="comment"></textarea>
+                <button type="submit" class="btn btn-primary">Comment</button>
+                {{ csrf_field() }}
+            </form>
+        </div>
+    </div>
+    <hr>
+    <header>Comments</header>
+    <div class="row full">
+        <div class="col-md-10">
+            @foreach($qcomments as $qcomment)
+                <article class="partial" data-queryid="{{ $query->id }}" data-qcommentid="{{ $qcomment->id }}">
+                    <h6>Comment by {!! ($qcomment->name) !!} - </h6>
+                    <p class="lead">{!! ($qcomment->comment) !!}</p>
+
+
+                    <div class="interaction">
+                        <div class="likecnt">{{ $qcomment->qclikecnt }}</div>
+                        {{--<a href="#" class="pclike">Like</a>   |--}}
+                        <a href="#" class="qclike">{{ Auth::user()->qclikes()->where('qcomment_id', $qcomment->id)->first() ? Auth::user()->qclikes()->where('qcomment_id', $qcomment->id)->first()->like == 1 ? 'Liked' : 'Like' : 'Like' }}</a>   |
+                        <div class="dislikecnt">{{ $qcomment->qcdislikecnt }}</div>
+                        {{--<a href="#" class="pclike">Dislike</a> |--}}
+                        <a href="#" class="qclike">{{ Auth::user()->qclikes()->where('qcomment_id', $qcomment->id)->first() ? Auth::user()->qclikes()->where('qcomment_id', $qcomment->id)->first()->like == 0 ? 'Disliked' : 'Dislike' : 'Dislike' }}</a>   |
+                    </div>
+
+                    <a href="{{ route('qcomment.delete',['qcommentid' => $qcomment->id]) }}">Delete</a>
+                    <hr>
+                </article>
+            @endforeach
+        </div>
+    </div>
+    <script>
+        var token = ' {{ Session::token() }} ';
+        var urlQLike = ' {{ route('qlike') }} ';
+        var urlQCLike = ' {{ route('qclike') }} ';
+    </script>
 @endsection

@@ -134,22 +134,30 @@
 @section('content')
     @include('partials.message-block')
     @foreach($queries as $query)
-        <article class="post panel panel-default" data-postid="{{ $query->id }}">
+        <article class="post panel panel-default" data-queryid="{{ $query->id }}">
             <b>{{ $query->qtitle }}</b> :-
             <p class="lead"> {!! $query->qbody !!} </p>
             {{--<p> {{ substr(strip_tags($post->body),0,10) }}{{ strlen(strip_tags($post->body)) >10 ? "..." : "" }} </p>--}}
             <div class="info">
-                Posted by {{ $query->user->first_name }} on {{ $query->created_at }}
+                Posted by {{ $query->user->name }} on {{ $query->created_at }}
             </div>
             <div class="interaction">
-                <a href="#" class="like">Like</a>   |
-                <a href="#" class="like">Disike</a>   |
+                <!--addy-->
+                <div class="likecnt">{{$query->qlikecnt}}</div>
+                <a href="#" class = "qlike">{{Auth::user()->likes()->where('query_id',$query->id)->first()? Auth::user()->likes()->where('query_id',$query->id)->first()->qlike == 1 ? 'Liked' : 'Like' : 'Like'}}</a> |
+                <div class="dislikecnt">{{$query->qdislikecnt}}</div>
+                <a href="#" class = "qlike">{{Auth::user()->likes()->where('query_id',$query->id)->first()? Auth::user()->likes()->where('query_id',$query->id)->first()->qlike == 0 ? 'Disliked' : 'Dislike' : 'Dislike'}}</a>
                 @if(Auth::user() == $query->user)
-                    <a href="#" class="edit">Edit</a>   |
+                    |   <a href="#" class="edit">Edit</a>   |
                     <a href="{{ route('query.delete',['query_id' => $query->id]) }}">Delete</a>
                 @endif
                 <a href="{{ route('query.view',['query_id' => $query->id]) }}">| Read more</a>
             </div>
         </article>
     @endforeach
+    <!--   addy   -->
+    <script>
+        var token = '{{Session::token()}}';
+        var urlQLike = '{{route('qlike')}}';
+    </script>
 @endsection

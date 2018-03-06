@@ -25,11 +25,27 @@ class User extends Model implements Authenticatable
         return $this->hasMany('App\Plike');
     }
 
+    public function qcomments() {
+        return $this->hasMany('App\Qcomment');
+    }
+
+    public function qclikes() {
+        return $this->hasMany('App\Qclike');
+    }
+
+    //addy
+    public function likes() {
+        return $this->hasMany('App\QLike');
+    }
     public function pclikes(){
         return $this->hasMany('App\PClike');
     }
 
     public function collaborates(){
         return $this->hasMany('App\Collaborate');
+    }
+
+    public function books(){
+        return $this->hasMany('App\Book');
     }
 }

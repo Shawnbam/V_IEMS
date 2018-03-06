@@ -21,7 +21,14 @@
                 <label for="body"> <b> Description </b> </label>
                 <textarea class="form-control" placeholder="Enter Description" class="form-control" rows="5" id="body" name="body"></textarea>
                 <br>
-
+                <label for="title"><b>Search Tags</b></label>
+                <select class="js-example-basic-multiple form-control" name="tags[]" id="tags" multiple="multiple">
+                    @foreach($tags as $tag)
+                        <option>{{ $tag->tag_name }}</option>
+                    @endforeach
+                </select>
+                <small> <a data-toggle="modal" data-target="#myModal">cant find your tag?</a></small>
+                <br><br>
                 {{--<label> Upload Image <br> </label>--}}
 
                 {{--<input id="input-b1" name="input-b1" type="file" class="form-control" >--}}
@@ -75,6 +82,37 @@
             {{--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>--}}
         {{--</div>--}}
     {{--</div>--}}
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+            <div  class="modal-content">
+                <div class="modal-header">
+                    <h4         class="modal-title">Add new tags to list
+                    </h4>
+                </div>
+                <div         class="modal-body">
+                    <form action="{{ route('tag.createTag') }}" method="post">
+                        <label for="title"><b>Add Tags</b></label>
+                        <input type="text" class="form-control" placeholder="Add tags" name="addtags" id="addtags" >
+                        <button type="submit" class="btn btn-primary">Add</button>
+                        {{ csrf_field() }}
+                    </form>
+                    <br>
 
+                </div>
+                <div         class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        $(function(){
+            $('select.js-example-basic-multiple').select2();
+        });
+
+        /*$(window).ready(function() {
+            $('select.js-example-basic-multiple').select2();
+        });*/
+    </script>
 @endsection
 

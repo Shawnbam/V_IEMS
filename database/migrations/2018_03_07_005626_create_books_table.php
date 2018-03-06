@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateQueriesTable extends Migration
+class CreateBooksTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,17 +13,14 @@ class CreateQueriesTable extends Migration
      */
     public function up()
     {
-        Schema::create('queries', function (Blueprint $table) {
+        Schema::create('books', function (Blueprint $table) {
             $table->increments('id');
-            $table->timestamps();
-            $table->string('qtitle');
-            $table->text('qbody');
-            $table->string('qtype');
-            $table->integer('qlikecnt');
-            $table->integer('qdislikecnt');
-            $table->text('tags');
-
+            $table->string('bookname');
+            $table->integer('sem');
+            $table->string('branch');
             $table->integer('user_id');
+            $table->integer('price');
+            $table->timestamps();
         });
     }
 
@@ -34,6 +31,6 @@ class CreateQueriesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('queries');
+        Schema::dropIfExists('books');
     }
 }

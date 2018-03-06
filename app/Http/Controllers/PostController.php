@@ -6,6 +6,7 @@ use App\Post;
 use App\Pcomment;
 use Illuminate\Http\Request;
 use App\User;
+use App\Tag;
 use App\Plike;
 use Auth;
 use Illuminate\Support\Facades\Input;
@@ -69,8 +70,32 @@ class PostController extends Controller{
             return view('home.hompg', ['posts' => $posts , 'postscsi' => $postscsi , 'postsitsa' => $postsitsa , 'postsacm' => $postsacm , 'postsiee' => $postsiee]);
     */
 
+    public function postCreateTag(Request $request)
+    {
+        $tags = Tag::all();
+        $tagname = $request['addtags'];
+        foreach($tags as $tag){
+            if(strtolower($tag->tag_name) == strtolower($tagname)){
+                $message = 'Tag already exists';
+                return view('posts.addpost', ['tags' => $tags])->with(['message' => $message]);
+            }
+        }
+        $tag = new Tag();
+        $tag->tag_name = $tagname;
+        $tag->save();
+
+        $tags = Tag::all();
+        $message = 'Tag successfully added';
+        return view('posts.addpost', ['tags' => $tags])->with(['message' => $message]);
+        //return redirect()->route('home.feeds')->with(['message' => $message]);
+
+
+    }
+
+
     public function getAddPost(){
-        return view('posts.addpost');
+        $tags = Tag::all();
+        return view('posts.addpost', ['tags' => $tags]);
     }
 
     public function postCreatePost(Request $request){
@@ -86,6 +111,12 @@ class PostController extends Controller{
         $post->type = 'common';
         $post->plikecnt = 0;
         $post->pdislikecnt= 0;
+        if($request->has('tags')) {
+            $post->tags = implode(', ', $request['tags']);
+        }
+        else{
+            $post->tags = "null";
+        }
 
         if($request->user()->posts()->save($post)){
             $message = 'Post successfully Created';

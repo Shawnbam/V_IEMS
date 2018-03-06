@@ -9,14 +9,23 @@
     <meta name="author" content="">
     <title>SB Admin - Start Bootstrap Template</title>
     <!-- Bootstrap core CSS-->
+    <!-- Bootstrap core JavaScript-->
+    <script src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous"></script>
+    {{--<script src="https://code.jquery.com/jquery-migrate-3.0.1.js" integrity="sha256-VvnF+Zgpd00LL73P2XULYXEn6ROvoFaa/vbfoiFlZZ4=" crossorigin="anonymous"></script>--}}
 
+    {{--<script src="{{ URL::to('viemsvendor/jquery/jquery.min.js') }}"></script>--}}
+    <script src="{{ URL::to('viemsvendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ URL::to('viemsvendor/jquery-easing/jquery.easing.min.js') }}"></script>
+
+    <script src="{{ URL::to('js/sb-admin.min.js') }}"></script>
+    <script src="{{ URL::to('tinymce\js\tinymce\tinymce.min.js') }}"></script>
     <link rel="stylesheet" href="{{asset('viemsvendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
     <link rel="stylesheet" href="{{asset('viemsvendor/font-awesome/css/font-awesome.min.css')}}" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="{{asset('css/sb-admin.css')}}" rel="stylesheet" >
     <link rel="stylesheet" href="{{asset('css/body.css')}}" rel="stylesheet" >
     <link rel="stylesheet" href="{{asset('body.css')}}" rel="stylesheet" >
     <link rel="stylesheet" href="{{ URL::to('css/body.css') }}">
-
+    <link rel="stylesheet" href="{{ URL::to('css/select2.css') }}">
 </head>
 
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
@@ -107,20 +116,11 @@
                     </li>
                 </ul>
             </li>
-
             <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Menu Levels">
-                <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseMulti" data-parent="#exampleAccordion">
+                <a class="nav-link" href="{{ route('books.buy') }}">
                     <i class="fa fa-shopping-cart"></i>
-                    <span class="nav-link-text">Buy/Sell Books</span>
+                    <span class="nav-link-text">Buy/Sell</span>
                 </a>
-                <ul class="sidenav-second-level collapse" id="collapseMulti">
-                    <li>
-                        <a href="#">Buy</a>
-                    </li>
-                    <li>
-                        <a href="#">Sell</a>
-                    </li>
-                </ul>
             </li>
         </ul>
 
@@ -179,10 +179,10 @@
     <div class="container-fluid">
         <!-- Breadcrumbs-->
         {{--<ol class="breadcrumb">--}}
-            {{--<li class="breadcrumb-item">--}}
-                {{--<a href="{{ route('home.feeds') }}">Home</a>--}}
-            {{--</li>--}}
-            {{--<li class="breadcrumb-item active">Posts</li>--}}
+        {{--<li class="breadcrumb-item">--}}
+        {{--<a href="{{ route('home.feeds') }}">Home</a>--}}
+        {{--</li>--}}
+        {{--<li class="breadcrumb-item active">Posts</li>--}}
         {{--</ol>--}}
         <div class="row posts">
             <div class="col-md-9">
@@ -194,19 +194,19 @@
 
 
             {{--<div class="col-md-3">--}}
-                {{--<div class="container border" style="padding: 20px">--}}
-                    {{--<div class="panel panel-default">--}}
-                        {{--<h5>Suggested</h5>--}}
-                        {{--<ul>--}}
-                            {{--<li>Suggestion 1</li>--}}
-                            {{--<li>Suggestion 2</li>--}}
-                            {{--<li>Suggestion 3</li>--}}
-                            {{--<li>Suggestion 4</li>--}}
-                            {{--<li>Suggestion 5</li>--}}
+            {{--<div class="container border" style="padding: 20px">--}}
+            {{--<div class="panel panel-default">--}}
+            {{--<h5>Suggested</h5>--}}
+            {{--<ul>--}}
+            {{--<li>Suggestion 1</li>--}}
+            {{--<li>Suggestion 2</li>--}}
+            {{--<li>Suggestion 3</li>--}}
+            {{--<li>Suggestion 4</li>--}}
+            {{--<li>Suggestion 5</li>--}}
 
-                        {{--</ul>--}}
-                    {{--</div>--}}
-                {{--</div>--}}
+            {{--</ul>--}}
+            {{--</div>--}}
+            {{--</div>--}}
             {{--</div>--}}
         </div>
     </div>
@@ -233,17 +233,7 @@
             </div>
         </div>
     </div>
-    <!-- Bootstrap core JavaScript-->
-    <script src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous"></script>
-    {{--<script src="https://code.jquery.com/jquery-migrate-3.0.1.js" integrity="sha256-VvnF+Zgpd00LL73P2XULYXEn6ROvoFaa/vbfoiFlZZ4=" crossorigin="anonymous"></script>--}}
 
-    {{--<script src="{{ URL::to('viemsvendor/jquery/jquery.min.js') }}"></script>--}}
-    <script src="{{ URL::to('viemsvendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-    <script src="{{ URL::to('viemsvendor/jquery-easing/jquery.easing.min.js') }}"></script>
-    <script src="{{ URL::to('js/appmain.js') }}"></script>
-
-    <script src="{{ URL::to('js/sb-admin.min.js') }}"></script>
-    <script src="{{ URL::to('tinymce\js\tinymce\tinymce.min.js') }}"></script>
     <script>
         tinymce.init({
             selector:'textarea',
@@ -288,6 +278,8 @@
             })
         })
     </script>
+    <script src="{{ asset('js/select2.js') }}"></script>
+    <script src="{{ URL::to('js/appmain.js') }}"></script>
 
     @yield('script')
 </div>

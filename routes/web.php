@@ -225,3 +225,62 @@ Route::post('/postcommentlike',[
     'uses' => 'PcommentController@postLikeCPost',
     'as' => 'pclike'
 ]);
+
+
+Route::get('/books', [
+    'uses' => 'BookController@getBook',
+    'as' => 'books.buy'
+]);
+
+
+
+Route::get('/listsub', [
+    'uses' => 'BookController@listsub',
+    'as' => 'books.listsub'
+]);
+
+
+Route::post('/booksold', [
+    'uses' => 'BookController@postSellBooks',
+    'as' => 'books.sell'
+]);
+
+
+Route::post('/CreatingTag', [
+    'uses' => 'PostController@postCreateTag',
+    'as' => 'tag.createTag'
+]);
+
+Route::post('/CreatingQTag', [
+    'uses' => 'QueryController@postCreateQTag',
+    'as' => 'tag.createQTag'
+]);
+
+
+Route::post('/SaveQueryComment/{query_id}/{user_id}/{uname}', [
+    'uses' => 'QcommentController@saveQComment',
+    'as' => 'qcomment.save'
+]);
+
+
+Route::get('/DeleteQueryComment/{qcommentid}', [
+    'uses' => 'QcommentController@deleteQComment',
+    'as' => 'qcomment.delete'
+]);
+
+
+Route::get('/DeleteQuery/{query_id}', [
+    'uses' => 'QueryController@getDeleteQuery',
+    'as' => 'query.delete'
+]);
+
+
+Route::post('/Qclike',[
+    'uses' => 'QcommentController@postLikeCQuery',
+    'as' => 'qclike'
+]);
+
+Route::post('/QLike', [
+    'uses' => 'QueryController@postLikeQuery',
+    'as' => 'qlike'
+]);
