@@ -38,7 +38,7 @@ class User extends Model implements Authenticatable
         return $this->hasMany('App\QLike');
     }
     public function pclikes(){
-        return $this->hasMany('App\PClike');
+        return $this->hasMany('App\Pclike');
     }
 
     public function collaborates(){
