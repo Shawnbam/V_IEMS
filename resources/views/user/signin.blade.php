@@ -140,8 +140,8 @@
     <div class="col-md-6">
         <form action="{{ route('user.signin') }}" method="post">
             <div class="form-group">
-                <label for="email" >Email</label><br>
-                <input class="form-control" type="email" id="email" name="email"  size="40" placeholder="example@email.com">
+                <label for="email" >Roll Number</label><br>
+                <input class="form-control" type="text" id="email" name="email"  size="40" >
             </div>
             <div class="form-group" >
                 <label for="password" >Password</label><br>
@@ -159,7 +159,7 @@
             </div>
             <div class="form-group">
                 <label for="email" >Email</label><br>
-                <input class="form-control" type="email" id="email" name="email"  size="40" placeholder="example@email.com" autofocus>
+                <input class="form-control" type="text" id="email" name="email"  size="40" placeholder="example@email.com" autofocus>
             </div>
             <div class="form-group" >
                 <label for="password" >Password</label><br>

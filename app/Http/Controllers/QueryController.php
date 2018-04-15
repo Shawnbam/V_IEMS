@@ -82,13 +82,13 @@ class QueryController extends Controller{
     public function getQuery($query_id){
         $query = Query::where('id', $query_id)->first();
         $qcomments = Qcomment::where('query_id', $query_id)->orderBy('created_at','desc')->get();
-//yaad rakh bum ye
-//        if( Auth::user() != $post->user ){
-//            return redirect()->back();
-//        }
-//        $post->delete();
-//        return redirect()->route('dashboard')->with(['message' => 'Successfully Deleted!']);
-        return view('QA.viewQuery',['query' => $query]);
+        //yaad rakh bum ye
+        //        if( Auth::user() != $post->user ){
+        //            return redirect()->back();
+        //        }
+        //        $post->delete();
+        //        return redirect()->route('dashboard')->with(['message' => 'Successfully Deleted!']);
+        return view('QA.viewQuery',['query' => $query, 'qcomments' => $qcomments]);
     }
 
 

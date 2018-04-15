@@ -26,6 +26,29 @@
     <link rel="stylesheet" href="{{asset('body.css')}}" rel="stylesheet" >
     <link rel="stylesheet" href="{{ URL::to('css/body.css') }}">
     <link rel="stylesheet" href="{{ URL::to('css/select2.css') }}">
+    {{--<style>--}}
+        {{--/* width */--}}
+        {{--::-webkit-scrollbar {--}}
+            {{--width: 20px;--}}
+        {{--}--}}
+
+        {{--/* Track */--}}
+        {{--::-webkit-scrollbar-track {--}}
+            {{--box-shadow: inset 0 0 5px grey;--}}
+            {{--border-radius: 10px;--}}
+        {{--}--}}
+
+        {{--/* Handle */--}}
+        {{--::-webkit-scrollbar-thumb {--}}
+            {{--background: red;--}}
+            {{--border-radius: 10px;--}}
+        {{--}--}}
+
+        {{--/* Handle on hover */--}}
+        {{--::-webkit-scrollbar-thumb:hover {--}}
+            {{--background: #b30000;--}}
+        {{--}--}}
+    {{--</style>--}}
 </head>
 
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
@@ -157,11 +180,11 @@
                 </div>
             </li>
             <li class="nav-item">
-                <form class="form-inline my-2 my-lg-0 mr-lg-2">
+                <form action="{{ route('search') }}" class="form-inline my-2 my-lg-0 mr-lg-2" method="get">
                     <div class="input-group">
-                        <input class="form-control" type="text" placeholder="Search for...">
+                        <input class="form-control" name="searchtext" type="text" placeholder="Search for...">
                         <span class="input-group-append">
-                <button class="btn btn-primary" type="button">
+                <button class="btn btn-primary" type="submit">
                   <i class="fa fa-search"></i>
                 </button>
               </span>
@@ -188,6 +211,12 @@
             <div class="col-md-9">
                 <div class="container">
                     @yield('content')
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="container">
+                    @yield('rec')
                 </div>
             </div>
 

@@ -141,6 +141,9 @@
             <div class="info">
                 Posted by {{ $query->user->name }} on {{ $query->created_at }}
             </div>
+            <div class="info">
+                Tags: {{ $post->user->tags }}
+            </div>
             <div class="interaction">
                 <!--addy-->
                 <div class="likecnt">{{$query->qlikecnt}}</div>

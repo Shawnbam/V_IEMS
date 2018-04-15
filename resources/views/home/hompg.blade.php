@@ -127,7 +127,29 @@
 @section('title')
     Homepage
 @endsection
+@section('styles')
+    <style>
+        /* width */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
 
+        /* Track */
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        /* Handle */
+        ::-webkit-scrollbar-thumb {
+            background: #888;
+        }
+
+        /* Handle on hover */
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+    </style>
+@endsection
 @section('content')
     @include('partials.message-block')
             @foreach($posts as $post)
@@ -136,6 +158,9 @@
                     <p class="lead" style="word-wrap: normal;"> {!! $post->body !!} </p>
                     <div class="info">
                         Posted by {{ $post->user->name }} on {{ $post->created_at }}
+                    </div>
+                    <div class="info">
+                        Tags: {{ $post->user->tags }}
                     </div>
                     <div class="interaction">
                         <div class="likecnt">{{ $post->plikecnt }}</div>
@@ -155,4 +180,33 @@
         var urlLike = ' {{ route('plike') }} ';
     </script>
 
+@endsection
+
+
+@section('rec')
+    <strong>Recommendations :- </strong>
+    @foreach($recs as $rec)
+        <article class="post panel panel-default" data-postid="{{ $rec->id }}">
+            <b>{{ $rec->title }}</b> :-
+            <p class="lead" style="word-wrap: normal;"> {!! $rec->body !!} </p>
+            <div class="info">
+                Posted by {{ $rec->user->name }} on {{ $rec->created_at }}
+            </div>
+            <div class="interaction">
+                <div class="likecnt">{{ $rec->plikecnt }}</div>
+                <a href="#" class="plike">{{ Auth::user()->plikes()->where('post_id', $rec->id)->first() ? Auth::user()->plikes()->where('post_id', $rec->id)->first()->like == 1 ? 'Liked' : 'Like' : 'Like' }}</a>   |
+                <div class="dislikecnt">{{ $rec->pdislikecnt }}</div>
+                <a href="#" class="plike">{{ Auth::user()->plikes()->where('post_id', $rec->id)->first() ? Auth::user()->plikes()->where('post_id', $rec->id)->first()->like == 0 ? 'Disliked' : 'Dislike' : 'Dislike' }}</a>   |
+                @if(Auth::user() == $rec->user)
+                    <a href="{{ route('post.edit', ['post_id' => $rec->id]) }}" class="edit">Edit</a>   |
+                    <a href="{{ route('post.delete',['post_id' => $rec->id]) }}">Delete</a> |
+                @endif
+                <a href="{{ route('post.view',['post_id' => $rec->id]) }}">Read more</a>
+            </div>
+        </article>
+    @endforeach
+    {{--<script>--}}
+        {{--var token = ' {{ Session::token() }} ';--}}
+        {{--var urlLike = ' {{ route('plike') }} ';--}}
+    {{--</script>--}}
 @endsection

@@ -134,3 +134,8 @@ $('.qclike').on('click',function (event) {
             }
         });
 });
+
+$('#img').on('click',function (event) {
+    $('.btnshow').show();
+    console.log('here');
+});

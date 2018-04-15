@@ -20,10 +20,10 @@ class UserController extends Controller{
 
     public function postSignin(Request $request){
         $this -> validate($request, [
-            'email' => 'email|required',
+            'email' => 'required',
             'password' => 'required|min:4'
         ]);
-        if(Auth::attempt(['email' => $request->input('email'), 'password' => $request->input('password')]))
+        if(Auth::attempt(['roll' => $request->input('email'), 'password' => $request->input('password')]))
         {
             //dd('its');
             return redirect()->route('home.feeds', ['type' => 'home']);
@@ -77,6 +77,7 @@ class UserController extends Controller{
         $user->type = 'common';
         $user->save();
         Auth::login($user);
+
         return redirect()->route('home.feeds', ['type' => 'home']);
 //
 //        $this -> validate($request, [
@@ -99,6 +100,46 @@ class UserController extends Controller{
         Auth::logout();
         //return redirect()->back();//using back is tricky many a times
         return redirect()->route('home');
+    }
+
+    public function proedit(){
+        return view('user.editprofile');
+//        $pass = Ack();
+    }
+
+    public function editpro(Request $request){
+        $pass = Auth::User()->id;
+        $user = User::find($pass);
+        if( Auth::user()->id != $user->id ){
+            //dd(Auth::user().' '.$user->user );
+            return redirect()->back();
+        }
+        $user->name = $request['name'];
+        $user->phone= $request['phone'];
+        $user->email= $request['email'];
+        $user->linkedin = $request['linkedin'];
+        $user->twitter = $request['twitter'];
+        $user->fb = $request['fb'];
+        $user->github = $request['github'];
+        $user->update();
+
+        return redirect()->route('myprofile');
+    }
+
+
+
+    public function img(Request $request){
+        $img = $request['img'];
+        if ($img !== null) {
+            echo $img->getClientOriginalExtension();
+        }
+        $user = Auth::user();
+        $input['imagename'] = time().'.'.$img->getClientOriginalExtension();
+        $dest = public_path('/images/'.Auth::User()->id);
+        $img->move($dest, $input['imagename']);
+        $user->img = 'images/'.Auth::User()->id.'/'.$input['imagename'];
+        $user->update();
+        return redirect()->back();
     }
 
 

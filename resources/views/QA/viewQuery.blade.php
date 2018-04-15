@@ -140,6 +140,9 @@
         <div class="info">
             Posted by {{ $query->user->name }} on {{ $query->created_at }}
         </div>
+        <div class="info">
+            Tags: {{ $post->user->tags }}
+        </div>
         <div class="interaction">
             <div class="likecnt">{{$query->qlikecnt}}</div>
             <a href="#" class = "qlike">{{Auth::user()->likes()->where('query_id',$query->id)->first()? Auth::user()->likes()->where('query_id',$query->id)->first()->qlike == 1 ? 'Liked' : 'Like' : 'Like'}}</a> |

@@ -197,6 +197,7 @@ Route::get('/Collaborate', [
     'as' => 'collaborate.view'
 ]);
 
+
 Route::get('/PostYourIdea', [
     'uses' => 'CollaborateController@getCollaboratePost',
     'as' => 'collab.post'
@@ -280,7 +281,32 @@ Route::post('/Qclike',[
     'as' => 'qclike'
 ]);
 
+
 Route::post('/QLike', [
     'uses' => 'QueryController@postLikeQuery',
     'as' => 'qlike'
+]);
+
+
+Route::get('/Search', [
+    'uses' => 'SearchController@search',
+    'as' => 'search'
+]);
+
+
+
+Route::get('/EditProfile', [
+    'uses' => 'UserController@proedit',
+    'as' => 'editprofile'
+]);
+
+Route::post('/EditPro', [
+    'uses' => 'UserController@editpro',
+    'as' => 'editpro'
+]);
+
+
+Route::post('/AddProfilePic', [
+    'uses' => 'UserController@img',
+    'as' => 'img'
 ]);

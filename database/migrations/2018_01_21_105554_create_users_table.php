@@ -17,9 +17,17 @@ class CreateUsersTable extends Migration
             $table->increments('id');
             $table->rememberToken();
             $table->string('name');
+            $table->string('roll');
+            $table->integer('phone');
             $table->string('email')->unique();
             $table->string('password');
             $table->string('type');
+            $table->string('tags');
+            $table->string('linkedin');
+            $table->string('twitter');
+            $table->string('fb');
+            $table->string('github');
+            $table->string('img');
             $table->timestamps();
         });
     }

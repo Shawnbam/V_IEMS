@@ -20,8 +20,17 @@ class PostController extends Controller{
         $posts = Post::where('type', '=', $type)
             ->orderBy('created_at','desc')
             ->get();
+
+        $keys = explode(",", Auth::user()->tags);
+        $keywords = [];
+        //dd($keys);
+        foreach($keys as $key){
+            $keywords[] = ['tags', 'LIKE', '%'.$key.'%'];
+        }
+        $recs = Post::where($keywords)->where($keywords)->get();
+        return view('home.hompg', ['posts' => $posts, 'recs' => $recs]);
+
         //$posts = Post::orderBy('created_at','desc')->get();
-        return view('home.hompg', ['posts' => $posts]);
     }
     public function getHomeFeeds(){
         //dd($type);
@@ -29,8 +38,19 @@ class PostController extends Controller{
         $posts = Post::where('type', '=', 'common')
             ->orderBy('created_at','desc')
             ->get();
+
+        $keys = explode(",", Auth::user()->tags);
+        $keywords = [];
+        //dd($keys);
+        foreach($keys as $key){
+            $keywords[] = ['tags', 'LIKE', '%'.$key.'%'];
+        }
+        $recs = Post::where($keywords)->get();
+        //dd($recs);
+
+
         //$posts = Post::orderBy('created_at','desc')->get();
-        return view('home.hompg', ['posts' => $posts]);
+        return view('home.hompg', ['posts' => $posts, 'recs' => $recs]);
     }
 
     public function getCommittees(){
@@ -108,7 +128,7 @@ class PostController extends Controller{
         $post = new Post();
         $post->title = $request['title'];
         $post->body = $request['body'];
-        $post->type = 'common';
+        $post->type = Auth::user()->type;
         $post->plikecnt = 0;
         $post->pdislikecnt= 0;
         if($request->has('tags')) {
