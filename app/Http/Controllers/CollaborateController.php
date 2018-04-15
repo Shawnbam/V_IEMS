@@ -51,7 +51,7 @@ class CollaborateController extends Controller{
         );
         Mail::send('mail',['data' => $data],function ($message) use ($data){
             $message->from('shbhmambavale7@gmail.com', 'Shubham');
-            $message->to('aditya.mahajan996@gmail.com');
+            $message->to('shbhmambavale7@gmail.com');
             $message->subject($data['subject']);
         });
 

@@ -156,29 +156,7 @@
         </ul>
 
         <ul class="navbar-nav ml-auto">
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle mr-lg-2" id="alertsDropdown" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="fa fa-fw fa-bell"></i>
-                    <span class="d-lg-none">Alerts
-              <span class="badge badge-pill badge-warning">6 New</span>
-            </span>
-                    <span class="indicator text-warning d-none d-lg-block">
-              <i class="fa fa-fw fa-circle"></i>
-            </span>
-                </a>
-                <div class="dropdown-menu" aria-labelledby="alertsDropdown">
-                    <h6 class="dropdown-header">New Alerts:</h6>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">
-              <span class="text-success">
-                <strong>
-                  <i class="fa fa-long-arrow-up fa-fw"></i>Status Update</strong>
-              </span>
-                        <span class="small float-right text-muted">11:21 AM</span>
-                        <div class="dropdown-message small">This is an automated server response message. All systems are online.</div>
-                    </a>
-                </div>
-            </li>
+
             <li class="nav-item">
                 <form action="{{ route('search') }}" class="form-inline my-2 my-lg-0 mr-lg-2" method="get">
                     <div class="input-group">
@@ -200,13 +178,6 @@
 </nav>
 <div class="content-wrapper">
     <div class="container-fluid">
-        <!-- Breadcrumbs-->
-        {{--<ol class="breadcrumb">--}}
-        {{--<li class="breadcrumb-item">--}}
-        {{--<a href="{{ route('home.feeds') }}">Home</a>--}}
-        {{--</li>--}}
-        {{--<li class="breadcrumb-item active">Posts</li>--}}
-        {{--</ol>--}}
         <div class="row posts">
             <div class="col-md-9">
                 <div class="container">
@@ -219,24 +190,6 @@
                     @yield('rec')
                 </div>
             </div>
-
-
-
-            {{--<div class="col-md-3">--}}
-            {{--<div class="container border" style="padding: 20px">--}}
-            {{--<div class="panel panel-default">--}}
-            {{--<h5>Suggested</h5>--}}
-            {{--<ul>--}}
-            {{--<li>Suggestion 1</li>--}}
-            {{--<li>Suggestion 2</li>--}}
-            {{--<li>Suggestion 3</li>--}}
-            {{--<li>Suggestion 4</li>--}}
-            {{--<li>Suggestion 5</li>--}}
-
-            {{--</ul>--}}
-            {{--</div>--}}
-            {{--</div>--}}
-            {{--</div>--}}
         </div>
     </div>
 

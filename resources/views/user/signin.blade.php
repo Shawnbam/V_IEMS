@@ -137,7 +137,7 @@
 <div class="jumbotron text-center row">
     <h1>V-IEMS</h1>
     <p>An inhouse student interaction platform</p>
-    <div class="col-md-6">
+    <div class="col-sm-4 col-md-offset-4">
         <form action="{{ route('user.signin') }}" method="post">
             <div class="form-group">
                 <label for="email" >Roll Number</label><br>
@@ -151,24 +151,24 @@
             {{ csrf_field() }}
         </form>
     </div>
-    <div class="col-md-6">
-        <form action="{{ route('user.signup') }}" method="post">
-            <div class="form-group">
-                <label for="name" >Name</label><br>
-                <input class="form-control" type="text" id="name" name="name"  size="40" autofocus>
-            </div>
-            <div class="form-group">
-                <label for="email" >Email</label><br>
-                <input class="form-control" type="text" id="email" name="email"  size="40" placeholder="example@email.com" autofocus>
-            </div>
-            <div class="form-group" >
-                <label for="password" >Password</label><br>
-                <input class="form-control" type="password" id="password" name="password"  size="40"  placeholder="password" autofocus>
-            </div>
-            <button type="submit" class="btn btn-primary">Sign Up</button>
-            {{ csrf_field() }}
-        </form>
-    </div>
+    {{--<div class="col-md-6">--}}
+        {{--<form action="{{ route('user.signup') }}" method="post">--}}
+            {{--<div class="form-group">--}}
+                {{--<label for="name" >Name</label><br>--}}
+                {{--<input class="form-control" type="text" id="name" name="name"  size="40" autofocus>--}}
+            {{--</div>--}}
+            {{--<div class="form-group">--}}
+                {{--<label for="email" >Email</label><br>--}}
+                {{--<input class="form-control" type="text" id="email" name="email"  size="40" placeholder="example@email.com" autofocus>--}}
+            {{--</div>--}}
+            {{--<div class="form-group" >--}}
+                {{--<label for="password" >Password</label><br>--}}
+                {{--<input class="form-control" type="password" id="password" name="password"  size="40"  placeholder="password" autofocus>--}}
+            {{--</div>--}}
+            {{--<button type="submit" class="btn btn-primary">Sign Up</button>--}}
+            {{--{{ csrf_field() }}--}}
+        {{--</form>--}}
+    {{--</div>--}}
 
 </div>
 
@@ -177,7 +177,7 @@
     <div class="row">
         <div class="col-sm-8">
             <h2>About V-IEMS</h2><br>
-            <h4>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</h4><br>
+            <h4> V-Information Exchange Management System is a website where students of the institute can interact with peers, share information with them, post their queries, and learn about the domains of their interests.</h4><br>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
             <br>
         </div>

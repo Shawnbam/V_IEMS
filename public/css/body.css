@@ -10,12 +10,22 @@
       word-wrap: break-word;
 }
 
+
+
 .posts .post{
     padding-left: 10px;
     border-left: 3px solid #a21b24;
     margin-bottom: 30px;
-      word-wrap: break-word;
+    word-wrap: break-word;
 }
+
+.recs {
+    padding-left: 10px;
+    border-left: 3px solid green;
+    margin-bottom: 30px;
+    word-wrap: break-word;
+}
+
 
 .full{
     border-left: 3px solid #a21b24;
@@ -32,5 +42,17 @@
 .posts .post .info{
     color: #aaa;
     font-style: italic;
-      word-wrap: break-word;
+    word-wrap: break-word;
 }
+.recs .infoo{
+    color: #aaa;
+    font-style: italic;
+    word-wrap: break-word;
+}
+
+.infooo{
+    color: green;
+    font-style: italic;
+    word-wrap: break-word;
+}
+

@@ -146,7 +146,9 @@
                 <td>{{ $subject->sem }}</td>
                 <td>{{ $subject->price }}</td>
                 <td>{{ $subject->user_id }}</td>
+                <td><a href="#users">Buy</a></td>
             </tr>
+
         @endforeach
 
     </table>
