@@ -2,7 +2,7 @@
 
 
 @section('title')
-    Add Post
+    Edit Post
 @endsection
 
 

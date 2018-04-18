@@ -76,7 +76,18 @@ class QueryController extends Controller{
     public function getQueryFeeds(){
         $queries= Query::orderBy('created_at','desc')->get();
         //$posts = Post::orderBy('created_at','desc')->get();
-        return view('QA.viewqueries', ['queries' => $queries]);
+        $keys = explode(",", Auth::user()->tags);
+        $keywords = [];
+        //dd($keys);
+        foreach($keys as $key){
+            $keywords[] = ['tags', 'LIKE', '%'.$key.'%'];
+        }
+        $recs = Query::where($keywords)->get();
+        //dd($recs);
+
+
+        //$posts = Post::orderBy('created_at','desc')->get();
+        return view('QA.viewqueries', ['queries' => $queries, 'recs' => $recs]);
     }
 
     public function getQuery($query_id){
@@ -168,5 +179,36 @@ class QueryController extends Controller{
         $qlikecnt->update();
         $qdislikecnt->update();
         return response()->json(['qlikecnt'=>$qlikecnt->qlikecnt , 'qdislikecnt'=>$qdislikecnt->qdislikecnt], 200);
+    }
+
+    protected function postEditQuery($queryid){
+        $query = Query::where('id', $queryid)->first();
+        return view('QA.editquery',['query' => $query]);
+    }
+
+    public function postUpdateQuery(Request $request){
+        $input = Input::get('cbtn');
+        $pass = $request['query_id'];
+        if($input == 'delete'){
+            return $this->getDeleteQuery($pass);
+        }
+        else if($input == 'update'){
+            $this -> validate($request, [
+                'title' => 'required|max:50',
+            ]);
+            $query = Query::find($pass);
+            if( Auth::user() != $query->user ){
+                return redirect()->back();
+            }
+            $query->qbody = $request['body'];
+            $query->qtitle = $request['title'];
+            $query->update();
+            if( Auth::user() != $query->user ){
+                return redirect()->back();
+            }
+            $message = 'Query updated';
+            return redirect()->route('query.view', ['queryid' => $query->id])->with(['message' => $message]);
+        }
+        return redirect()->back();
     }
 }

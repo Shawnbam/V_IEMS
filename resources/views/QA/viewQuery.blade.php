@@ -140,8 +140,8 @@
         <div class="info">
             Posted by {{ $query->user->name }} on {{ $query->created_at }}
         </div>
-        <div class="info">
-            Tags: {{ $post->user->tags }}
+        <div class="infooo">
+            Tags: {{ $query->user->tags }}
         </div>
         <div class="interaction">
             <div class="likecnt">{{$query->qlikecnt}}</div>
@@ -149,7 +149,8 @@
             <div class="dislikecnt">{{$query->qdislikecnt}}</div>
             <a href="#" class = "qlike">{{Auth::user()->likes()->where('query_id',$query->id)->first()? Auth::user()->likes()->where('query_id',$query->id)->first()->qlike == 0 ? 'Disliked' : 'Dislike' : 'Dislike'}}</a>
             @if(Auth::user() == $query->user)
-                |   <a href="{{ route('query.edit') }}" class="edit">Edit</a>   |
+                |
+                <a href="{{ route('query.edit', ['queryid' => $query->id]) }}" class="edit">Edit</a>   |
                 <a href="{{ route('query.delete', ['query_id' => $query->id]) }}">Delete</a>
             @endif
         </div>

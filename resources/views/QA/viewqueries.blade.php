@@ -141,8 +141,8 @@
             <div class="info">
                 Posted by {{ $query->user->name }} on {{ $query->created_at }}
             </div>
-            <div class="info">
-                Tags: {{ $post->user->tags }}
+            <div class="infooo">
+                Tags: {{ $query->user->tags }}
             </div>
             <div class="interaction">
                 <!--addy-->
@@ -151,7 +151,8 @@
                 <div class="dislikecnt">{{$query->qdislikecnt}}</div>
                 <a href="#" class = "qlike">{{Auth::user()->likes()->where('query_id',$query->id)->first()? Auth::user()->likes()->where('query_id',$query->id)->first()->qlike == 0 ? 'Disliked' : 'Dislike' : 'Dislike'}}</a>
                 @if(Auth::user() == $query->user)
-                    |   <a href="#" class="edit">Edit</a>   |
+                    |   <a href="{{ route('query.edit', ['queryid' => $query->id]) }}" class="edit">Edit</a>   |
+
                     <a href="{{ route('query.delete',['query_id' => $query->id]) }}">Delete</a>
                 @endif
                 <a href="{{ route('query.view',['query_id' => $query->id]) }}">| Read more</a>
@@ -164,3 +165,26 @@
         var urlQLike = '{{route('qlike')}}';
     </script>
 @endsection
+
+
+
+@if($recs)
+@section('rec')
+    <strong>Recommendations :- </strong>
+    <div class="pre-scrollable">
+        @foreach($recs as $rec)
+            <article class="recs panel panel-default" data-postid="{{ $rec->id }}">
+                <b>{{ $rec->qtitle }}</b> :-
+                <p class="lead" style="word-wrap: normal;"> {!! $rec->qbody !!} </p>
+                <div class="infoo">
+                    Posted by {{ $rec->user->name }} on {{ $rec->created_at }}
+                </div>
+                <div class="interaction">
+                    <a href="{{ route('post.view',['post_id' => $rec->id]) }}">Read more</a>
+                </div>
+            </article>
+        @endforeach
+
+    </div>
+@endsection
+@endif
