@@ -135,6 +135,8 @@
 </nav>
 
 <div class="jumbotron text-center row">
+    @include('partials.message-block')
+
     <h1>V-IEMS</h1>
     <p>An inhouse student interaction platform</p>
     <div class="col-sm-4 col-md-offset-4">
@@ -151,24 +153,24 @@
             {{ csrf_field() }}
         </form>
     </div>
-    <div class="col-md-6">
-        <form action="{{ route('user.signup') }}" method="post">
-            <div class="form-group">
-                <label for="name" >Name</label><br>
-                <input class="form-control" type="text" id="name" name="name"  size="40" autofocus>
-            </div>
-            <div class="form-group">
-                <label for="roll" >Email</label><br>
-                <input class="form-control" type="text" id="roll" name="roll"  size="40" placeholder="example@email.com" autofocus>
-            </div>
-            <div class="form-group" >
-                <label for="password" >Password</label><br>
-                <input class="form-control" type="password" id="password" name="password"  size="40"  placeholder="password" autofocus>
-            </div>
-            <button type="submit" class="btn btn-primary">Sign Up</button>
-            {{ csrf_field() }}
-        </form>
-    </div>
+    {{--<div class="col-md-6">--}}
+        {{--<form action="{{ route('user.signup') }}" method="post">--}}
+            {{--<div class="form-group">--}}
+                {{--<label for="name" >Name</label><br>--}}
+                {{--<input class="form-control" type="text" id="name" name="name"  size="40" autofocus>--}}
+            {{--</div>--}}
+            {{--<div class="form-group">--}}
+                {{--<label for="roll" >Email</label><br>--}}
+                {{--<input class="form-control" type="text" id="roll" name="roll"  size="40" placeholder="example@email.com" autofocus>--}}
+            {{--</div>--}}
+            {{--<div class="form-group" >--}}
+                {{--<label for="password" >Password</label><br>--}}
+                {{--<input class="form-control" type="password" id="password" name="password"  size="40"  placeholder="password" autofocus>--}}
+            {{--</div>--}}
+            {{--<button type="submit" class="btn btn-primary">Sign Up</button>--}}
+            {{--{{ csrf_field() }}--}}
+        {{--</form>--}}
+    {{--</div>--}}
 
 </div>
 
@@ -178,7 +180,10 @@
         <div class="col-sm-8">
             <h2>About V-IEMS</h2><br>
             <h4> V-Information Exchange Management System is a website where students of the institute can interact with peers, share information with them, post their queries, and learn about the domains of their interests.</h4><br>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+            <p>In todays highly competitive environment in the field of Computer Science and Engineering, students need help of each other for a lot of purposes. Few examples include: a student skilled in a particular domain can help other students who are new to the field. A final year student might want to share his placement experience and provide tips to the junior students. A student might want to gather students who share the same interest as him/her on a particular topic and form a team to start on a new project. A student might want to sell his previous semester books to students who are studying or yet to study that particular semester. All such cases involve student-student interactions. And so our system aims to serve as a common platform for the same.
+
+                V Information Exchange Management System is a Student website which allows students of the institute to share information with peers, ask queries/doubts or provide answers to queries about different topics, take timed mock tests set by teachers of the institute, buy/sell books to other students, and other such features which would increase the information exchange among the students and ease the interaction with each other.The system would also analyze the interests of the students, and based on that, different topics that might be of interest to the student would be recommended to them.
+                </p>
             <br>
         </div>
         <div class="col-sm-4">
@@ -197,22 +202,7 @@
             <p><span class="glyphicon glyphicon-phone"></span> +00 1515151515</p>
             <p><span class="glyphicon glyphicon-envelope"></span> myemail@something.com</p>
         </div>
-        <div class="col-sm-7 slideanim">
-            <div class="row">
-                <div class="col-sm-6 form-group">
-                    <input class="form-control" id="name" name="name" placeholder="Name" type="text" required>
-                </div>
-                <div class="col-sm-6 form-group">
-                    <input class="form-control" id="email" name="email" placeholder="Email" type="email" required>
-                </div>
-            </div>
-            <textarea class="form-control" id="comments" name="comments" placeholder="Comment" rows="5"></textarea><br>
-            <div class="row">
-                <div class="col-sm-12 form-group">
-                    <button class="btn btn-default pull-right" type="submit">Send</button>
-                </div>
-            </div>
-        </div>
+
     </div>
 </div>
 

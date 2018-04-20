@@ -5,6 +5,7 @@
 @endsection
 
 @section('content')
+    @include('partials.message-block')
     <div class="container">
 
         <!-- Trigger the modal with a button -->
@@ -52,8 +53,6 @@
                                     <option>ETRX</option>
                                 </select>
                                 Price <input class="form-control" name="price" type="number">
-                                Image
-                                <input type="file" class="form-control" name="pic" accept="image/*">
                                 <br>
                                 <div class="row">
                                     <div class="col-sm-8">
@@ -145,8 +144,8 @@
                 <td>{{ $subject->branch }}</td>
                 <td>{{ $subject->sem }}</td>
                 <td>{{ $subject->price }}</td>
-                <td>{{ $subject->user_id }}</td>
-                <td><a href="#users">Buy</a></td>
+                <td>{{ $subject->roll }}</td>
+                <td><a href="{{ route('sendmail', ['id' => $subject->id]) }}">Buy</a></td>
             </tr>
 
         @endforeach

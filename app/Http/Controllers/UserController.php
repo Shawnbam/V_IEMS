@@ -29,7 +29,7 @@ class UserController extends Controller{
             return redirect()->route('home.feeds', ['type' => 'home']);
         }
 
-        return redirect()->back();
+        return redirect()->back()->with(['message' => "Invalid User Credentials"]);
     }
 
 //    public function postSignin(Request $request){

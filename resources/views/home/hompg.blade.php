@@ -65,7 +65,7 @@
 
 @endsection
 
-@if($recs)
+@if(isset($recs))
     @section('rec')
         <strong>Recommendations :- </strong>
         <div class="pre-scrollable">

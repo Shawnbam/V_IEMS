@@ -18,6 +18,7 @@ class CreateBooksTable extends Migration
             $table->string('bookname');
             $table->integer('sem');
             $table->string('branch');
+            $table->string('roll');
             $table->integer('user_id');
             $table->integer('price');
             $table->timestamps();

@@ -125,12 +125,14 @@
                     <span class="nav-link-text">Quiz</span>
                 </a>
                 <ul class="sidenav-second-level collapse" id="collapseQuiz">
-                    <li>
-                        <a class="nav-link" href="{{ route('getyourquiz') }}">
-                            <i class="fa fa-question-circle" aria-hidden="true"></i>
-                            <span class="nav-link-text">My Quiz</span>
-                        </a>
-                    </li>
+                    @if(Auth::User()->type == "teacher")
+                        <li>
+                            <a class="nav-link" href="{{ route('getyourquiz') }}">
+                                <i class="fa fa-question-circle" aria-hidden="true"></i>
+                                <span class="nav-link-text">My Quiz</span>
+                            </a>
+                        </li>
+                    @endif
                     <li>
                         <a class="nav-link" href="{{ route('giveq') }}">
                             <i class="fa fa-exclamation-circle"></i>
@@ -184,12 +186,13 @@
                     @yield('content')
                 </div>
             </div>
-
-            <div class="col-md-3">
-                <div class="container">
-                    @yield('rec')
+            @if(isset($recs))
+                <div class="col-md-3">
+                    <div class="container">
+                        @yield('rec')
+                    </div>
                 </div>
-            </div>
+            @endif
         </div>
     </div>
 

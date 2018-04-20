@@ -5,10 +5,17 @@
 @endsection
 
 @section('content')
-    @include('partials.message-block')
+    @if(isset($err))
+        <div class="row">
+            <div class="alert alert-danger">
+                {{ $err }}
+            </div>
+        </div>
+    @endif
 
         <div class="row">
-            <form action="{{ route('img') }}" method="post" enctype="multipart/form-data">
+
+           <form action="{{ route('img') }}" method="post" enctype="multipart/form-data">
 
             @if(Auth::User()->img == null)
                 <i class="fa fa-user" aria-hidden="true" style="font-size:200px;"></i>

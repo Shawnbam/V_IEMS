@@ -33,13 +33,13 @@ class PostController extends Controller{
 //        else if(count($keys) == 5)
 //            $recs = Post::where('tags', 'LIKE', '%'.$keys[0].'%')->orwhere('tags', 'LIKE', '%'.$keys[1].'%')->orwhere('tags', 'LIKE', '%'.$keys[2].'%')->orwhere('tags', 'LIKE', '%'.$keys[3].'%')->orwhere('tags', 'LIKE', '%'.$keys[4].'%')->get();
 
-        $recs = Post::where(function ($query) use ($keys) {
-            foreach ($keys as $key) {
-                $query->orWhere('tags', 'LIKE', '%'.$key.'%');
-            }
-        })->get();
+//        $recs = Post::where(function ($query) use ($keys) {
+//            foreach ($keys as $key) {
+//                $query->orWhere('tags', 'LIKE', '%'.$key.'%');
+//            }
+//        })->get();
 
-        return view('home.hompg', ['posts' => $posts, 'recs' => $recs]);
+        return view('home.hompg', ['posts' => $posts]);
 
         //$posts = Post::orderBy('created_at','desc')->get();
     }

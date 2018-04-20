@@ -19,12 +19,16 @@ class CollaborateController extends Controller{
     }
 
     public function getCollaboratePost(){
+        if(Auth::User()->email == null or Auth::User()->email == "")
+            return view('user.profile')->with(['err' => "Enter your email first."]);
+
         return view('collab.collabpost');
 
     }
 
 
     public function postCollabSave(Request $request){
+
         $title = $request->input('title');
         $idea = $request->input('idea');
         $collborate = new Collaborate();

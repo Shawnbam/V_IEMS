@@ -254,6 +254,11 @@ Route::group(['middleware' => 'auth'], function (){
         'as' => 'collab.with'
     ]);
 
+    Route::get('/BuyBook/{id}', [
+        'uses' => 'BookController@sendmail',
+        'as' => 'sendmail'
+    ]);
+
 
     Route::post('/postlike',[
         'uses' => 'PostController@postLikePost',
