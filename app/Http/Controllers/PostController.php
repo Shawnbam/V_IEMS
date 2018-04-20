@@ -10,7 +10,7 @@ use App\Tag;
 use App\Plike;
 use Auth;
 use Illuminate\Support\Facades\Input;
-
+use DB;
 
 class PostController extends Controller{
 
@@ -22,12 +22,23 @@ class PostController extends Controller{
             ->get();
 
         $keys = explode(",", Auth::user()->tags);
-        $keywords = [];
-        //dd($keys);
-        foreach($keys as $key){
-            $keywords[] = ['tags', 'LIKE', '%'.$key.'%'];
-        }
-        $recs = Post::where($keywords)->where($keywords)->get();
+//        if(count($keys) == 1)
+//            $recs = Post::where('tags', 'LIKE', '%'.$key[0].'%')->get();
+//        else if(count($keys) == 2)
+//            $recs = Post::where('tags', 'LIKE', '%'.$keys[0].'%')->orwhere('tags', 'LIKE', '%'.$keys[1].'%')->orwhere('tags', 'LIKE', '%'.$keys[1].'%')->orwhere('tags', 'LIKE', '%'.$keys[1].'%')->orwhere('tags', 'LIKE', '%'.$keys[1].'%')->get();
+//        else if(count($keys) == 3)
+//            $recs = Post::where('tags', 'LIKE', '%'.$keys[0].'%')->orwhere('tags', 'LIKE', '%'.$keys[1].'%')->orwhere('tags', 'LIKE', '%'.$keys[2].'%')->get();
+//        else if(count($keys) == 4)
+//            $recs = Post::where('tags', 'LIKE', '%'.$keys[0].'%')->orwhere('tags', 'LIKE', '%'.$keys[1].'%')->orwhere('tags', 'LIKE', '%'.$keys[2].'%')->orwhere('tags', 'LIKE', '%'.$keys[3].'%')->get();
+//        else if(count($keys) == 5)
+//            $recs = Post::where('tags', 'LIKE', '%'.$keys[0].'%')->orwhere('tags', 'LIKE', '%'.$keys[1].'%')->orwhere('tags', 'LIKE', '%'.$keys[2].'%')->orwhere('tags', 'LIKE', '%'.$keys[3].'%')->orwhere('tags', 'LIKE', '%'.$keys[4].'%')->get();
+
+        $recs = Post::where(function ($query) use ($keys) {
+            foreach ($keys as $key) {
+                $query->orWhere('tags', 'LIKE', '%'.$key.'%');
+            }
+        })->get();
+
         return view('home.hompg', ['posts' => $posts, 'recs' => $recs]);
 
         //$posts = Post::orderBy('created_at','desc')->get();
@@ -39,15 +50,27 @@ class PostController extends Controller{
             ->orderBy('created_at','desc')
             ->get();
 
-        $keys = explode(",", Auth::user()->tags);
-        $keywords = [];
-        //dd($keys);
-        foreach($keys as $key){
-            $keywords[] = ['tags', 'LIKE', '%'.$key.'%'];
-        }
-        $recs = Post::where($keywords)->get();
-        //dd($recs);
 
+        $keys = explode(",", Auth::user()->tags);
+//        if(count($keys) == 1)
+//            $recs = Post::where('tags', 'LIKE', '%'.$key[0].'%')->get();
+//        else if(count($keys) == 2)
+//            $recs = Post::where('tags', 'LIKE', '%'.$keys[0].'%')->orwhere('tags', 'LIKE', '%'.$keys[1].'%')->orwhere('tags', 'LIKE', '%'.$keys[1].'%')->orwhere('tags', 'LIKE', '%'.$keys[1].'%')->orwhere('tags', 'LIKE', '%'.$keys[1].'%')->get();
+//        else if(count($keys) == 3)
+//            $recs = Post::where('tags', 'LIKE', '%'.$keys[0].'%')->orwhere('tags', 'LIKE', '%'.$keys[1].'%')->orwhere('tags', 'LIKE', '%'.$keys[2].'%')->get();
+//        else if(count($keys) == 4)
+//            $recs = Post::where('tags', 'LIKE', '%'.$keys[0].'%')->orwhere('tags', 'LIKE', '%'.$keys[1].'%')->orwhere('tags', 'LIKE', '%'.$keys[2].'%')->orwhere('tags', 'LIKE', '%'.$keys[3].'%')->get();
+//        else if(count($keys) == 5)
+//            $recs = Post::where('tags', 'LIKE', '%'.$keys[0].'%')->orwhere('tags', 'LIKE', '%'.$keys[1].'%')->orwhere('tags', 'LIKE', '%'.$keys[2].'%')->orwhere('tags', 'LIKE', '%'.$keys[3].'%')->orwhere('tags', 'LIKE', '%'.$keys[4].'%')->get();
+//
+//            $recs = Post::where('tags', 'LIKE', '%PCB%')->orwhere('tags', 'LIKE', '%graph%')->get();
+        //dd($recs);
+        $recs = Post::where(function ($query) use ($keys) {
+            foreach ($keys as $key) {
+                $query->orWhere('tags', 'LIKE', '%'.$key.'%');
+            }
+        })->get();
+        //dd($recs);
 
         //$posts = Post::orderBy('created_at','desc')->get();
         return view('home.hompg', ['posts' => $posts, 'recs' => $recs]);
@@ -111,6 +134,21 @@ class PostController extends Controller{
 
 
     }
+    public function postCreateTagprofile(Request $request)
+    {
+        $user = User::find(Auth::User()->id);
+        if($user->tags == null or $user->tags == "")
+            $user->tags = $request['addtags'];
+        else
+            $user->tags = $user->tags.', '.$request['addtags'];
+
+        $user->save();
+
+        return redirect()->back();
+        //return redirect()->route('home.feeds')->with(['message' => $message]);
+
+
+    }
 
 
     public function getAddPost(){
@@ -122,7 +160,7 @@ class PostController extends Controller{
 
         $this->validate($request,[
             'title' => 'required',
-            'body' => 'required|max:500'
+            'body' => 'required'
         ]);
 
         $post = new Post();

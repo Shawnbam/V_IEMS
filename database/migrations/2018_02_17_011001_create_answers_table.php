@@ -19,6 +19,7 @@ class CreateAnswersTable extends Migration
             $table->string('question');
             $table->string('given_answer');
             $table->string('true_answer');
+            $table->string('roll');
 
             $table->foreign('stu_id')->references('id')->on('students');
 

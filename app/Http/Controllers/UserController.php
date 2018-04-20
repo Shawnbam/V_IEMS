@@ -56,27 +56,35 @@ class UserController extends Controller{
     public function postSignup(Request $request){
 
         $this -> validate($request, [
-            'email' => 'email|required|unique:users',
+            'roll' => 'required|unique:users',
             'password' => 'required|min:4'
         ]);
 
         $name = $request->input('name');
-        $email = $request->input('email');
+        $email = $request->input('roll');
         $password = bcrypt($request->input('password'));
 
-//ye bhi chalega
-////        $user = new User([
-//            'name' => $request->input('name'),
-//            'email' => $request->input('email'),
-//            'password' => bcrypt($ request->input('password'))
-//        ]);
         $user = new User();
         $user->name = $name;
-        $user->email = $email;
+        $user->roll = $email;
         $user->password = $password;
         $user->type = 'common';
+        $user->dept = 'INFT';
+        $user->email = " ";
+        $user->phone = 0;
+        $user->tags = " ";
+        $user->linkedin = " ";
+        $user->twitter = " ";
+        $user->fb = " ";
+        $user->github = " ";
+        $user->img= " ";
         $user->save();
+
         Auth::login($user);
+
+
+
+
 
         return redirect()->route('home.feeds', ['type' => 'home']);
 //
@@ -116,11 +124,31 @@ class UserController extends Controller{
         }
         $user->name = $request['name'];
         $user->phone= $request['phone'];
-        $user->email= $request['email'];
-        $user->linkedin = $request['linkedin'];
-        $user->twitter = $request['twitter'];
-        $user->fb = $request['fb'];
-        $user->github = $request['github'];
+        if($request['email'] == "" or $request['email'] == null)
+            $user->email = " ";
+        else
+        $user->email = $request['email'];
+
+        if($request['linkedin'] == "" or $request['linkedin'] == null)
+            $user->linkedin = " ";
+        else
+            $user->linkedin = $request['linkedin'];
+
+        if($request['twitter'] == "" or $request['twitter'] == null)
+            $user->twitter = " ";
+        else
+            $user->twitter = $request['twitter'];
+
+        if($request['fb'] == "" or $request['fb'] == null)
+            $user->fb = " ";
+        else
+            $user->fb = $request['fb'];
+
+        if($request['github'] == "" or $request['github'] == null)
+            $user->github = " ";
+        else
+            $user->github = $request['github'];
+
         $user->update();
 
         return redirect()->route('myprofile');

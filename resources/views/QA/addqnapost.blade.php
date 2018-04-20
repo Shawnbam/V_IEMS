@@ -1,4 +1,4 @@
-@extends('partials.header')
+@extends('partials.headerq')
 
 
 @section('title')

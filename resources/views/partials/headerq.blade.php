@@ -27,27 +27,27 @@
     <link rel="stylesheet" href="{{ URL::to('css/body.css') }}">
     <link rel="stylesheet" href="{{ URL::to('css/select2.css') }}">
     {{--<style>--}}
-        {{--/* width */--}}
-        {{--::-webkit-scrollbar {--}}
-            {{--width: 20px;--}}
-        {{--}--}}
+    {{--/* width */--}}
+    {{--::-webkit-scrollbar {--}}
+    {{--width: 20px;--}}
+    {{--}--}}
 
-        {{--/* Track */--}}
-        {{--::-webkit-scrollbar-track {--}}
-            {{--box-shadow: inset 0 0 5px grey;--}}
-            {{--border-radius: 10px;--}}
-        {{--}--}}
+    {{--/* Track */--}}
+    {{--::-webkit-scrollbar-track {--}}
+    {{--box-shadow: inset 0 0 5px grey;--}}
+    {{--border-radius: 10px;--}}
+    {{--}--}}
 
-        {{--/* Handle */--}}
-        {{--::-webkit-scrollbar-thumb {--}}
-            {{--background: red;--}}
-            {{--border-radius: 10px;--}}
-        {{--}--}}
+    {{--/* Handle */--}}
+    {{--::-webkit-scrollbar-thumb {--}}
+    {{--background: red;--}}
+    {{--border-radius: 10px;--}}
+    {{--}--}}
 
-        {{--/* Handle on hover */--}}
-        {{--::-webkit-scrollbar-thumb:hover {--}}
-            {{--background: #b30000;--}}
-        {{--}--}}
+    {{--/* Handle on hover */--}}
+    {{--::-webkit-scrollbar-thumb:hover {--}}
+    {{--background: #b30000;--}}
+    {{--}--}}
     {{--</style>--}}
 </head>
 
@@ -158,7 +158,7 @@
         <ul class="navbar-nav ml-auto">
 
             <li class="nav-item">
-                <form action="{{ route('search') }}" class="form-inline my-2 my-lg-0 mr-lg-2" method="get">
+                <form action="{{ route('searchq') }}" class="form-inline my-2 my-lg-0 mr-lg-2" method="get">
                     <div class="input-group">
                         <input class="form-control" name="searchtext" type="text" placeholder="Search for...">
                         <span class="input-group-append">

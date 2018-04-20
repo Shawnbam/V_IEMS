@@ -17,3 +17,10 @@
         </div>
     </div>
 @endif
+@if(Session::has('error'))
+    <div class="row">
+        <div class="alert col-md-4 col-md-offset-4 alert-danger">
+            {{ Session::get('error') }}
+        </div>
+    </div>
+@endif

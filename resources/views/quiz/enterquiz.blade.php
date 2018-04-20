@@ -1,6 +1,7 @@
 @extends('partials.header')
 
 @section('content')
+    @include('partials.message-block')
     <form method="post" action="{{ route('quizpage') }}">
         {{ csrf_field() }}
 

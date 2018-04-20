@@ -38,6 +38,16 @@ Route::group(['middleware' => 'auth'], function (){
         'as' => 'myprofile'
     ]);
 
+    Route::get('/Journals', [
+        'uses' => 'JournalController@getview',
+        'as' => 'j.viewj'
+    ]);
+
+    Route::get('/AddJournals', [
+        'uses' => 'JournalController@getadd',
+        'as' => 'addj'
+    ]);
+
 
     Route::get('/Home/{type}', [
         'uses' => 'PostController@getCommitteesFeeds',
@@ -56,6 +66,11 @@ Route::group(['middleware' => 'auth'], function (){
         'as' => 'giveq'
     ]);
 
+    Route::get('/JournalsApproval', [
+        'uses' => 'JournalController@approveview',
+        'as' => 'approveview'
+    ]);
+
 
     Route::get('/YourQuiz', [
         'uses' => 'QuizController@getYourQuiz',
@@ -68,11 +83,22 @@ Route::group(['middleware' => 'auth'], function (){
         'as' => 'getresults'
     ]);
 
+    Route::get('/Results/{uniqueid}/{active}', [
+        'uses' => 'QuizController@activate',
+        'as' => 'activate'
+    ]);
+
 
 
     Route::post('/Quiz',[
         'uses' => 'StudentController@store',
         'as' => 'quizpage'
+    ]);
+
+
+    Route::post('/SaveJournal',[
+        'uses' => 'JournalController@postj',
+        'as' => 'postj'
     ]);
 
 
@@ -142,6 +168,12 @@ Route::group(['middleware' => 'auth'], function (){
     Route::get('/delete-post/{post_id}', [
         'uses' => 'PostController@getDeletePost',
         'as' => 'post.delete'
+    ]);
+
+
+    Route::get('/approve-journal/{postid}', [
+        'uses' => 'JournalController@approveit',
+        'as' => 'approveit'
     ]);
 
 
@@ -259,6 +291,11 @@ Route::group(['middleware' => 'auth'], function (){
         'as' => 'tag.createTag'
     ]);
 
+    Route::post('/CreatingTagProfile', [
+        'uses' => 'PostController@postCreateTagprofile',
+        'as' => 'tag.createTagp'
+    ]);
+
     Route::post('/CreatingQTag', [
         'uses' => 'QueryController@postCreateQTag',
         'as' => 'tag.createQTag'
@@ -298,6 +335,12 @@ Route::group(['middleware' => 'auth'], function (){
     Route::get('/Search', [
         'uses' => 'SearchController@search',
         'as' => 'search'
+    ]);
+
+
+    Route::get('/SearchQ', [
+        'uses' => 'SearchController@searchq',
+        'as' => 'searchq'
     ]);
 
 

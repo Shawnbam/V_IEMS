@@ -13,6 +13,10 @@ class User extends Model implements Authenticatable
         return $this->hasMany('App\Post');
     }
 
+    public function journals(){
+        return $this->hasMany('App\Journal');
+    }
+
     public function queries(){
         return $this->hasMany('App\Query');
     }

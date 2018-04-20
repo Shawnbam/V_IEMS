@@ -55,6 +55,7 @@ class QueryController extends Controller{
         $query ->qtype = 'common';
         $query ->qlikecnt = 0;
         $query ->qdislikecnt = 0;
+        //dd($request['tags']);
         if($request->has('tags')) {
             $query->tags = implode(', ', $request['tags']);
         }
@@ -77,12 +78,11 @@ class QueryController extends Controller{
         $queries= Query::orderBy('created_at','desc')->get();
         //$posts = Post::orderBy('created_at','desc')->get();
         $keys = explode(",", Auth::user()->tags);
-        $keywords = [];
-        //dd($keys);
-        foreach($keys as $key){
-            $keywords[] = ['tags', 'LIKE', '%'.$key.'%'];
-        }
-        $recs = Query::where($keywords)->get();
+        $recs = Query::where(function ($query) use ($keys) {
+            foreach ($keys as $key) {
+                $query->orWhere('tags', 'LIKE', '%'.$key.'%');
+            }
+        })->get();
         //dd($recs);
 
 

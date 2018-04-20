@@ -22,6 +22,11 @@
                 <td>{{ $result->time }}</td>
                 <td>{{ $result->uniqueid }}</td>
                 <td><a href="{{ route('getresults',['uniqueid' => $result->uniqueid]) }}">View Results</a></td>
+                @if($result->active == 0)
+                    <td><a href="{{ route('activate',['uniqueid' => $result->id, 'active' => $result->active]) }}">Activate</a></td>
+                @else
+                    <td><a href="{{ route('activate',['uniqueid' => $result->id, 'active' => $result->active]) }}">Deactivate</a></td>
+                @endif
             </tr>
         @endforeach
         </tbody>

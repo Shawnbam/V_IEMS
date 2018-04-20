@@ -71,6 +71,7 @@
                         <h3>{{strip_tags($arr['txt'])}} ?</h3>
                         <div class="col-lg-offset-1">
                             <input type="hidden" name="question" value="{{ $arr['txt'] }}">
+                            <input type="hidden" name="roll" value="{{Auth::User()->roll}}">
                             <input type="hidden" name="student_id" value="{{$student_id}}">
                             <input type="hidden" name="course" value="{{$cid}}">
                             <input type="hidden" name="true_answer" value="{{$arr['opt']}}">

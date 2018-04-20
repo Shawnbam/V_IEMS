@@ -1,8 +1,5 @@
-@extends('partials.headerq')
+@extends('partials.header')
 
-@section('title')
-    Homepage
-@endsection
 {{--@section('content')--}}
 {{--<section class="row posts">--}}
 {{--<div class="col-md-6 col-md-offset-3 abc">--}}
@@ -130,61 +127,60 @@
 @section('title')
     Homepage
 @endsection
+@section('styles')
+    <style>
+        /* width */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
 
+        /* Track */
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        /* Handle */
+        ::-webkit-scrollbar-thumb {
+            background: #888;
+        }
+
+        /* Handle on hover */
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+    </style>
+@endsection
 @section('content')
     @include('partials.message-block')
-    @foreach($queries as $query)
-        <article class="post panel panel-default" data-queryid="{{ $query->id }}">
-            <b>{{ $query->qtitle }}</b> :-
-            <p class="lead"> {!! $query->qbody !!} </p>
-            {{--<p> {{ substr(strip_tags($post->body),0,10) }}{{ strlen(strip_tags($post->body)) >10 ? "..." : "" }} </p>--}}
-            <div class="info">
-                Posted by {{ $query->user->name }} on {{ $query->created_at }}
-            </div>
-            <div class="infooo">
-                Tags: {{ $query->tags }}
-            </div>
-            <div class="interaction">
-                <!--addy-->
-                <div class="likecnt">{{$query->qlikecnt}}</div>
-                <a href="#" class = "qlike">{{Auth::user()->likes()->where('query_id',$query->id)->first()? Auth::user()->likes()->where('query_id',$query->id)->first()->qlike == 1 ? 'Liked' : 'Like' : 'Like'}}</a> |
-                <div class="dislikecnt">{{$query->qdislikecnt}}</div>
-                <a href="#" class = "qlike">{{Auth::user()->likes()->where('query_id',$query->id)->first()? Auth::user()->likes()->where('query_id',$query->id)->first()->qlike == 0 ? 'Disliked' : 'Dislike' : 'Dislike'}}</a>
-                @if(Auth::user() == $query->user)
-                    |   <a href="{{ route('query.edit', ['queryid' => $query->id]) }}" class="edit">Edit</a>   |
+    <a class="nav-link" href="{{ route('addj') }}">
+        <i class="fa fa-plus"></i>
+        <span class="nav-link-text">Add a Journal</span>
+    </a>
+    @if(Auth::User()->name == "admin")
+        <a class="nav-link" href="{{ route('approveview') }}">
+            <i class="fa fa-eye"></i>
+            <span class="nav-link-text">View Journals for approval</span>
+        </a>
+    @endif
 
-                    <a href="{{ route('query.delete',['query_id' => $query->id]) }}">Delete</a>
+    @foreach($posts as $post)
+        <article class="post panel panel-default" data-postid="{{ $post->id }}">
+            <b>{{ $post->title }}</b> :-
+            <p class="lead" style="word-wrap: normal;"> {!! $post->body !!} </p>
+            <div class="info">
+                Posted by
+                @if(Auth::User()->name == $post->user->name)
+                    <b>you</b> on {{ $post->created_at }}
+                @else
+                    {{ $post->user->name }} on {{ $post->created_at }}
                 @endif
-                <a href="{{ route('query.view',['query_id' => $query->id]) }}">| Read more</a>
             </div>
         </article>
     @endforeach
-    <!--   addy   -->
     <script>
-        var token = '{{Session::token()}}';
-        var urlQLike = '{{route('qlike')}}';
+        var token = ' {{ Session::token() }} ';
+        var urlLike = ' {{ route('plike') }} ';
     </script>
+
 @endsection
 
-
-
-@if($recs)
-@section('rec')
-    <strong>Recommendations :- </strong>
-    <div class="pre-scrollable">
-        @foreach($recs as $rec)
-            <article class="recs panel panel-default" data-postid="{{ $rec->id }}">
-                <b>{{ $rec->qtitle }}</b> :-
-                <p class="lead" style="word-wrap: normal;"> {!! $rec->qbody !!} </p>
-                <div class="infoo">
-                    Posted by {{ $rec->user->name }} on {{ $rec->created_at }}
-                </div>
-                <div class="interaction">
-                    <a href="{{ route('post.view',['post_id' => $rec->id]) }}">Read more</a>
-                </div>
-            </article>
-        @endforeach
-
-    </div>
-@endsection
-@endif

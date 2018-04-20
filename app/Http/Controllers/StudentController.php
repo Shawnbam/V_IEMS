@@ -6,7 +6,7 @@ use App\Question;
 use Illuminate\Http\Request;
 use App\Student;
 use App\Examinfo;
-
+use Auth;
 class StudentController extends Controller
 {
     /**
@@ -28,14 +28,23 @@ class StudentController extends Controller
         $initialScore=0;
 
         $checker=Student::where('student_id','=',$sIdForValidate)->where('uniqueid','=',$examCodeForValidate)->count();
-        if ($checker>0) {
+
+        if ($checker > 0) {
             return "YOU ALREADY DONE THIS EXAM";
         }else{
-            $student = Student::create([
-                'student_id' => $request->input('student_id'),
-                'uniqueid' => $request->input('exam_code'),
-                'score' =>$initialScore
-            ]);
+            $findcourse = Examinfo::where('uniqueid', (string)$request->input('exam_code'))->first();
+            if(count($findcourse) <= 0)
+                return redirect()->route('giveq')->with(['error' => 'Entered code is incorrect']);
+            elseif ($findcourse->active == 0)
+                return redirect()->route('giveq')->with(['error' => 'Please wait, the link is not activated yet.']);
+            $roll = Auth::User()->roll;
+            $student = new Student();
+
+            $student->student_id = $request->input('student_id');
+            $student->uniqueid = $request->input('exam_code');
+            $student->roll =  $roll;
+            $student->score = $initialScore;
+            $student->save();
 
             $id=$request->input('exam_code');
             $studentRealId=$request->input('student_id');

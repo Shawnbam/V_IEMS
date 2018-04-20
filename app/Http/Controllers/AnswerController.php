@@ -12,6 +12,7 @@ class AnswerController extends Controller{
         if ($request->ajax()) {
             $answer = new Answer();
             $answer->stu_id = $request->input('student_id');
+            $answer->roll = $request->input('roll');
             $answer->question = $request->input('question');
             $answer->given_answer = $request->input('answer');
             $answer->true_answer = $request->input('true_answer');

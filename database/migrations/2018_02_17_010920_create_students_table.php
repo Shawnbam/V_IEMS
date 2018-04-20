@@ -17,6 +17,7 @@ class CreateStudentsTable extends Migration
             $table->increments('id');
             $table->integer('student_id');
             $table->string('uniqueid');
+            $table->string('roll')->default("0");
             $table->integer('score')->nullable();
             $table->timestamps();
         });

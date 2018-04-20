@@ -141,7 +141,7 @@
             Posted by {{ $query->user->name }} on {{ $query->created_at }}
         </div>
         <div class="infooo">
-            Tags: {{ $query->user->tags }}
+            Tags: {{ $query->tags }}
         </div>
         <div class="interaction">
             <div class="likecnt">{{$query->qlikecnt}}</div>

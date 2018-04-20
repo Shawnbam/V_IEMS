@@ -39,6 +39,7 @@
                     <li class="list-group-item text-right"><span class="pull-left"><strong class="">Email</strong></span> {{ Auth::user()->email }}</li>
                     <li class="list-group-item text-right"><span class="pull-left"><strong class="">Phone</strong></span> {{ Auth::user()->phone }}</li>
                     <li class="list-group-item text-right"><span class="pull-left"><strong class="">Department</strong></span> {{ Auth::user()->dept }}</li>
+                    <li class="list-group-item text-right"><span class="pull-left"><strong class="">Tags</strong></span> {{ Auth::user()->tags }}</li>
                 </ul>
             </div>
 
@@ -54,15 +55,44 @@
                     <li class="list-group-item text-right"><span class="pull-left"><strong class="">Likes</strong></span> {{ Auth::user()->posts()->sum('plikecnt') }}</li>
                 </ul>
             </div>
-            <div class="col-sm-4">
-
+            <div class="col-sm-4" >
                 <ul class="list-group">
                     <li class="list-group-item text-muted">Social Media<i class="fa fa-dashboard fa-1x"></i>
                     </li>
-                    <li class="list-group-item text-right"><span class="pull-left"><strong class="">LinkedIn</strong></span>{{ Auth::user()->linkedin }}</li>
-                    <li class="list-group-item text-right"><span class="pull-left"><strong class="">Twitter</strong></span> {{ Auth::user()->twitter }}</li>
-                    <li class="list-group-item text-right"><span class="pull-left"><strong class="">Facebook</strong></span> {{ Auth::user()->fb }}</li>
-                    <li class="list-group-item text-right"><span class="pull-left"><strong class="">Github</strong></span> {{ Auth::user()->github }}</li>
+
+                    <li class="list-group-item text-right" >
+                        <span class="pull-left">
+                            <strong>LinkedIn</strong>
+                        </span>
+                        <div class="wordwrap">
+                        {{ Auth::user()->linkedin }}
+                        </div>
+                    </li>
+
+                    <li class="list-group-item text-right" >
+                        <span class="pull-left">
+                            <strong>Twitter</strong></span>
+                        <div class="wordwrap">
+                             {{ Auth::user()->twitter }}
+                        </div>
+                    </li>
+
+                    <li class="list-group-item text-right">
+                        <span class="pull-left">
+                            <strong>Facebook</strong></span>
+                        <div class="wordwrap">
+                             {{ Auth::user()->fb }}
+                        </div>
+                    </li>
+
+                    <li class="list-group-item text-right">
+                        <span class="pull-left">
+                            <strong>Github</strong></span>
+                        <div class="wordwrap">
+                            {{ Auth::user()->github }}
+                        </div>
+                    </li>
+
                 </ul>
             </div>
         </div>

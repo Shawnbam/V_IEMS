@@ -151,24 +151,24 @@
             {{ csrf_field() }}
         </form>
     </div>
-    {{--<div class="col-md-6">--}}
-        {{--<form action="{{ route('user.signup') }}" method="post">--}}
-            {{--<div class="form-group">--}}
-                {{--<label for="name" >Name</label><br>--}}
-                {{--<input class="form-control" type="text" id="name" name="name"  size="40" autofocus>--}}
-            {{--</div>--}}
-            {{--<div class="form-group">--}}
-                {{--<label for="email" >Email</label><br>--}}
-                {{--<input class="form-control" type="text" id="email" name="email"  size="40" placeholder="example@email.com" autofocus>--}}
-            {{--</div>--}}
-            {{--<div class="form-group" >--}}
-                {{--<label for="password" >Password</label><br>--}}
-                {{--<input class="form-control" type="password" id="password" name="password"  size="40"  placeholder="password" autofocus>--}}
-            {{--</div>--}}
-            {{--<button type="submit" class="btn btn-primary">Sign Up</button>--}}
-            {{--{{ csrf_field() }}--}}
-        {{--</form>--}}
-    {{--</div>--}}
+    <div class="col-md-6">
+        <form action="{{ route('user.signup') }}" method="post">
+            <div class="form-group">
+                <label for="name" >Name</label><br>
+                <input class="form-control" type="text" id="name" name="name"  size="40" autofocus>
+            </div>
+            <div class="form-group">
+                <label for="roll" >Email</label><br>
+                <input class="form-control" type="text" id="roll" name="roll"  size="40" placeholder="example@email.com" autofocus>
+            </div>
+            <div class="form-group" >
+                <label for="password" >Password</label><br>
+                <input class="form-control" type="password" id="password" name="password"  size="40"  placeholder="password" autofocus>
+            </div>
+            <button type="submit" class="btn btn-primary">Sign Up</button>
+            {{ csrf_field() }}
+        </form>
+    </div>
 
 </div>
 

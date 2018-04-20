@@ -21,6 +21,18 @@ class QuizController extends Controller{
         return view('quiz.myquiz')->with(['results' => $results, 'ctr' => 1]);
     }
 
+
+    public function activate($uniqueid,$active){
+        $res = Examinfo::find($uniqueid);
+        if($active == 0)
+            $res->active = 1;
+        else
+            $res->active = 0;
+        $res->update();
+        return redirect()->back();
+    }
+
+
     public function getResults($uniqueid){
         $myid = Auth::user()->id;
         $results = Student::where('uniqueid', '=', $uniqueid)->get();
@@ -40,7 +52,8 @@ class QuizController extends Controller{
             'Course' => $request->input('Course'),
             'question_lenth' => $request->input('question_lenth'),
             'uniqueid' => $request->input('uniqueid'),
-            'time' => $request->input('time')
+            'time' => $request->input('time'),
+            'active' => "0"
         ]);
         $arr = array();
         $cnt = $request->input('question_lenth');
